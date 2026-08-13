@@ -1,0 +1,43 @@
+HomeSafe — the privacy boundary refusing access
+Captured 2026-08-13 against cluster drying-gerbil (CockroachDB v26.2.5)
+
+These are not assertions. This is CockroachDB refusing, in its own words.
+HomeSafe promises a renter that their notes stay private until they choose
+to share them. Below is the mechanism that makes that true.
+
+--- evidence_ro CAN read the three public-evidence tables ---
+  OK        SELECT address_entity  (rows: 0)
+  OK        SELECT address_match  (rows: 0)
+  OK        SELECT public_event  (rows: 0)
+
+--- evidence_ro CANNOT read any private table ---
+  DENIED    user evidence_ro does not have SELECT privilege on relation resident_observation
+  DENIED    user evidence_ro does not have SELECT privilege on relation memory_item
+  DENIED    user evidence_ro does not have SELECT privilege on relation consent_grant
+  DENIED    user evidence_ro does not have SELECT privilege on relation evidence_packet
+  DENIED    user evidence_ro does not have SELECT privilege on relation housing_case
+  DENIED    user evidence_ro does not have SELECT privilege on relation audit_log
+  DENIED    user evidence_ro does not have SELECT privilege on relation user_account
+  DENIED    user evidence_ro does not have SELECT privilege on relation task
+  DENIED    user evidence_ro does not have SELECT privilege on relation agent_run
+  DENIED    user evidence_ro does not have SELECT privilege on relation evidence_packet_item
+
+--- evidence_ro cannot write to a table it may read (parameterised, so a
+    syntax error cannot masquerade as a permission denial) ---
+  DENIED    user evidence_ro does not have INSERT privilege on relation public_event
+
+--- app_rw cannot rewrite history: audit_log is append-only by a MISSING grant ---
+  DENIED    user app_rw does not have UPDATE privilege on relation audit_log
+  DENIED    user app_rw does not have DELETE privilege on relation audit_log
+
+--- app_rw cannot alter or insert the public record it cites as evidence ---
+  DENIED    user app_rw does not have UPDATE privilege on relation public_event
+  DENIED    user app_rw does not have INSERT privilege on relation public_event
+
+--- neither application login is an admin ---
+  admin members: managed-mcp, root, tarik
+  (app_rw and evidence_ro are absent, by design)
+
+--- PUBLIC no longer holds CREATE on the schema ---
+  public -> USAGE
+  (CREATE was revoked; without that, any login could add its own tables)
