@@ -55,11 +55,35 @@ and cannot run a single SQL statement. With `Cluster Operator` it gets full read
 There is no setting in between. Cockroach Labs' own docs confirm MCP requires Cluster Admin
 or Cluster Operator.
 
-**And the obvious escape hatch is closed.** The docs mention that connecting by OAuth offers
-a read-versus-write choice, so a read-only MCP does exist. But OAuth needs a person clicking
-through a browser, which a deployed server cannot do. A server must use an API key, and the
-API-key path has no read-only option. So any MCP connection a running app could make is
-necessarily read-write superuser across every database in its cluster.
+**And the obvious escape hatch is closed.** OAuth is the other way to connect, and it can be
+scoped to a single cluster rather than the whole organization. But OAuth needs a person
+clicking through a browser, which a deployed server cannot do. A server must use an API key.
+So any MCP connection a running app could make is necessarily read-write superuser across
+every database in its cluster.
+
+*(One caveat on our own evidence: a first read of the docs page reported that the OAuth
+consent screen offers a read-versus-write choice, and a second read of the same page did not
+reproduce that line. Treat "OAuth can be read-only" as probable but unconfirmed. It does not
+change the decision either way, because OAuth is unavailable to a server process.)*
+
+**Separately, the documented limits make MCP a poor fit for serving user traffic**, which we
+had not considered and which reaches the same conclusion independently:
+
+| Limit | Value | Why it matters here |
+|---|---|---|
+| Response size | **10 KiB** | A public-record timeline for one address can exceed this. Results would truncate silently mid-answer |
+| Query timeout | 20 seconds | Against a 12-second end-to-end agent budget, that is not a safety margin |
+| Default row limit | 25 (max 10,000) | Fine, but it means every call needs an explicit LIMIT to be correct |
+| Max statement length | 16,384 characters | Not a constraint for us |
+
+The 10 KiB ceiling is the telling one. It is a sensible size for a developer asking questions
+about a schema in an editor, and the wrong size for assembling a resident's evidence timeline.
+The tool is built for the job we are actually using it for.
+
+**Also worth recording:** the docs list the tools under explicit **"Read Operations"** and
+**"Write Operations"** headings. Write access is a designed feature, documented as such. The
+hackathon reference material's description of MCP as *"safe by default: read-only mode"* is
+simply not what the product does.
 
 ## Options
 
