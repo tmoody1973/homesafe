@@ -1,0 +1,16 @@
+{
+  "name": "homesafe",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/pg": "^8.21.0"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.2",
+    "pg": "^8.23.0"
+  }
+}
