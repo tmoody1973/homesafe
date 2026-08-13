@@ -1,0 +1,35 @@
+HomeSafe — database constraints refusing bad data
+Captured 2026-08-13 against cluster drying-gerbil (CockroachDB v26.2.5)
+
+These are not tests that assert. These are the database refusing to store
+data that would let HomeSafe mislead someone.
+
+--- 1. A public record cannot exist without saying what it does NOT prove ---
+Attempted: INSERT INTO public_event (...) with no caveat
+
+  ERROR:  null value in column "caveat" violates not-null constraint
+
+Why this matters: "a permit is not proof that a repair happened" is the
+single most important caveat in the product. It is enforced by the schema,
+not by anyone remembering to add it.
+
+--- 2. An unknown issue category is rejected at write time ---
+Attempted: INSERT ... event_category = 'not_a_real_category'
+
+  ERROR:  failed to satisfy CHECK constraint (event_category IN
+  ('heat_hot_water':::STRING, 'pest':::STRING, 'structural_safety':::STRING,
+   'permit':::STRING, 'utilities':::STRING, 'sanitation':::STRING,
+   'other':::STRING))
+
+Why this matters: a typo in an ingestion adapter fails immediately rather
+than producing a category that renders as a blank badge in the UI.
+
+--- 3. Migrations are idempotent ---
+  $ bun run migrate
+  nothing to apply
+
+--- Tables present ---
+  address_entity
+  address_match
+  public_event
+  schema_migrations
