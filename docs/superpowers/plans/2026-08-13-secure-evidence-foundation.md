@@ -51,10 +51,9 @@ Copied from the spec and project rules. Every task's requirements implicitly inc
 
 These are not tasks — they are hand-work that must happen before Task 1, because later tasks assume them.
 
-- [ ] **Drop the spike leftover.** `DROP TABLE IF EXISTS homesafe.spike_private_delete_me;`
+- [x] **Drop the spike leftover.** Done 2026-08-13; confirmed absent from `pg_tables`.
 - [ ] **Create a scoped AWS IAM user** to replace root on account `953791390715`. Minimum policy: `bedrock:InvokeModel`, `bedrock:Converse`, and `s3:GetObject`/`s3:PutObject` on the project bucket only. Re-authenticate the CLI against it. Root credentials must not reach Amplify, Lambda, or a local `.env`.
-- [ ] **Set a SQL password** you will use for migrations:
-  `ccloud cluster user password drying-gerbil tarik -p '<strong-password>'`
+- [x] **Set a SQL password** — done 2026-08-13. 48-char hex (URL-safe by construction), set via `ccloud`, written to gitignored `.env` at mode 600. `homesafe` database created. Verified with both psql and node-postgres.
 
 ---
 
@@ -147,6 +146,11 @@ bun add -d @types/pg typescript
 
 ```bash
 # Two logins, one cluster. Neither is `managed-mcp` — see docs/decisions/003.
+#
+# SSL: URLs deliberately OMIT sslrootcert=system. psql reads `system` as
+# "use the OS trust store"; node-postgres treats it as a filename and fails
+# with ENOENT. Verification is set in src/db/pool.ts instead.
+#
 # app_rw: case, consent, memory data.
 DATABASE_URL_APP=postgresql://app_rw:PASSWORD@drying-gerbil-31622.j77.aws-us-east-2.cockroachlabs.cloud:26257/homesafe?sslmode=verify-full
 # evidence_ro: SELECT on three public-evidence tables only.
@@ -774,7 +778,15 @@ let app: Pool | undefined;
 let evidence: Pool | undefined;
 
 function makePool(connectionString: string): Pool {
-  return new Pool({ connectionString, max: MAX_CLIENTS });
+  // ssl is set explicitly rather than left to the URL's sslmode. Verified
+  // 2026-08-13: node-postgres treats `sslrootcert=system` as a filename and
+  // dies with ENOENT, so the connection strings omit it and certificate
+  // verification is stated here instead. Do not add sslrootcert to the URL.
+  return new Pool({
+    connectionString,
+    max: MAX_CLIENTS,
+    ssl: { rejectUnauthorized: true },
+  });
 }
 
 export function appPool(): Pool {

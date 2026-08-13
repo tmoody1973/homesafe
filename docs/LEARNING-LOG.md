@@ -53,6 +53,41 @@ usually narrower than the word.
 
 ---
 
+## August 13, 2026 — The connection string that worked in one tool broke the other
+
+**What we expected.** That a single database connection string would work everywhere. The
+plan's `.env.example` had one, and the first thing we did with the new password was connect
+with `psql` and confirm it worked.
+
+**What happened.** `psql` refused first, asking for a certificate file at
+`~/.postgresql/root.crt`, and told us to add `sslrootcert=system` — meaning "use the trust
+store the operating system already has." Added it, connected fine.
+
+Then the same URL failed in the actual application code, because **node-postgres does not
+understand `system`.** It treats the value as a filename and dies with `ENOENT: no such file
+or directory, open 'system'`. Two tools, same standard-looking connection string, opposite
+requirements.
+
+The fix is to keep the URL free of it and state certificate verification in code instead —
+`ssl: { rejectUnauthorized: true }` in the connection pool. Tested both ways to be sure the
+secure setting was the one that worked, not just the permissive one.
+
+**What this cost:** about five minutes, because it was caught while writing a config file
+rather than in the middle of a task. **What it would have cost:** Task 4 builds the connection
+pool, and Tasks 8, 11, and 12 all run long ingests through it. An SSL error surfacing there
+would have looked like a database problem, a permissions problem, or a bad password — three
+wrong trails before the right one.
+
+**Worth generalising:** verifying a credential with a *different tool* than the one that will
+use it proves less than it appears to. The check that counts is the one made by the code that
+actually runs. Both places now carry a comment saying why the URL looks incomplete, because
+the obvious "fix" is to add the parameter back.
+
+**What I now believe.**
+*(Tarik to fill in.)*
+
+---
+
 ## August 13, 2026 — The spike killed the design, in about forty minutes
 
 **What we expected.** That CockroachDB's Managed MCP Server would connect to the cluster
