@@ -1,0 +1,55 @@
+HomeSafe — Boston open-data access, verified live
+Captured 2026-08-13 from Tarik's machine
+
+WHY THIS FILE EXISTS
+The dataset readiness doc warned that some Boston bulk-CSV downloads hit
+access controls during verification. That was from a different machine, so
+whether it applies to us was unknown. It does not — all five sources resolve
+and download.
+
+--- 1. All five catalog lookups succeed ---
+  OK  sam              .../live_street_address_management_sam_addresses.csv
+  OK  violations       .../tmpi6q1ybno.csv
+  OK  permits          .../tmpqk62y8oz.csv
+  OK  rentsmart        .../tmpaskjytt1.csv
+  OK  serviceRequests  .../tmpbzq9933f.csv
+
+--- 2. THE FILENAMES HAD ALREADY ROTATED ---
+This is the proof that resolving URLs through the catalog was necessary, not
+defensive over-engineering. Comparing the readiness doc (written 2026-08-12)
+against live values one day later:
+
+  violations       doc: tmpwkewfc3d.csv   live: tmpi6q1ybno.csv   CHANGED
+  permits          doc: tmpaezr9hww.csv   live: tmpqk62y8oz.csv   CHANGED
+  rentsmart        doc: tmpd2x943vy.csv   live: tmpaskjytt1.csv   CHANGED
+  serviceRequests  doc: tmpy83_aof3.csv   live: tmpbzq9933f.csv   CHANGED
+  sam              stable name, did not change
+
+Four of five changed in ONE DAY. Hard-coding the URLs from the readiness doc
+would have produced a pipeline that was already broken before it ran once.
+
+--- 3. Downloads are permitted (HTTP 206, Range request) ---
+  206  sam              120,881,730 bytes
+  206  violations         4,080,615 bytes
+  206  permits          237,396,874 bytes
+  206  rentsmart         85,620,220 bytes
+  206  serviceRequests   12,888,466 bytes
+
+Permits at 237 MB confirms streaming is mandatory, not optional.
+
+--- 4. Real column headers checked against the plan's mappers ---
+  sam         31 columns — all 11 the plan uses are present
+  permits     24 columns — all 11 the plan uses are present
+  violations  24 columns — plan referenced `zip`, which DOES NOT EXIST.
+                            The real field is `violation_zip`.
+
+--- 5. Personal data present in sources the spec had not flagged ---
+  violations: contact_addr1, contact_addr2, contact_city, contact_state,
+              contact_zip        <- owner/contact mailing address
+  permits:    applicant          <- who filed the permit
+  sam:        MAILING_NEIGHBORHOOD (a neighbourhood name, not personal)
+
+The spec's rule "never display owner fields" named only RentSmart and
+Property Assessment. Violations and permits carry personal data too, and the
+plan stored the ENTIRE source row as raw_payload — which would have written
+owner contact addresses into a table `evidence_ro` can read.
