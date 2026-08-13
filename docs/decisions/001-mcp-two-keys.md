@@ -1,7 +1,11 @@
 # 001 — Give the AI a public-records key and nothing else
 
 **Date:** August 13, 2026
-**Status:** Decided
+**Status:** ⚠️ **SUPERSEDED by [003](003-mcp-build-time-only.md), same day.** The spike in
+"How we'll know if this was right" ran and failed. Every assumption below about scoping
+MCP with database permissions turned out to be wrong. Kept unedited on purpose — the
+reasoning was sound given what we believed, and the record of it being falsified within
+hours is more useful than a tidy document that hides the correction.
 
 ## Decision
 

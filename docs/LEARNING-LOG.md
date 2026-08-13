@@ -53,6 +53,71 @@ usually narrower than the word.
 
 ---
 
+## August 13, 2026 — The spike killed the design, in about forty minutes
+
+**What we expected.** That CockroachDB's Managed MCP Server would connect to the cluster
+as some kind of database user, and that we could therefore restrict it with ordinary
+database permissions — let it read the public city records, and make the private resident
+notes invisible to it. That was decision 001, written a few hours earlier and reasoned
+through carefully.
+
+**What happened.** All four assumptions inside it turned out to be wrong.
+
+1. **MCP is not read-only.** The hackathon materials describe it as "safe by default:
+   read-only mode." It exposes tools called `create_table` and `insert_rows`, and both
+   worked — a table was created and a row inserted, from an AI client, over HTTP.
+2. **It connects as a SQL user called `managed-mcp`**, which does exist as a real named
+   identity — so the premise was half right. But it is superuser-equivalent, which means
+   database permissions do not apply to it. You cannot revoke from a superuser.
+3. **Database separation is not enough.** It listed every database on the cluster and read
+   a table in a different one from where it was pointed. Only *cluster* separation is a
+   real boundary, because the cluster ID is part of how MCP is addressed.
+4. **The real guardrails live in the MCP server, not the database.** Requests for the
+   `system` and `crdb_internal` schemas came back "blocked for security reasons" — a
+   protection implemented by Cockroach Labs in their MCP layer. Which is genuinely useful,
+   but it protects *their* internals. It does nothing for our tables.
+
+The one piece of good news, and it's the useful one: **access is all-or-nothing at the
+cloud-role level.** With the `CLUSTER_DEVELOPER` role the service account can see cluster
+metadata and cannot run a single SQL statement. With `CLUSTER_OPERATOR_WRITER` it gets
+full read *and* write. There is no middle setting. So the lever exists — it's just a much
+blunter one than the design assumed.
+
+**What this cost:** about forty minutes. **What it saved:** building an entire security
+architecture on an assumption that would have failed in front of judges, in the one part
+of the demo whose whole purpose is proving the system is trustworthy.
+
+**Then the docs disagreed with the experiment, and the experiment won.** CockroachDB's
+own documentation says: *"Tools cannot access the `system`, `crdb_internal`, `pg_catalog`,
+`information_schema`, and `pg_extension` schemas."* But we had already read from
+`pg_catalog` without trying to. Testing it deliberately:
+
+| Query | Result |
+|---|---|
+| `SELECT rolname FROM pg_catalog.pg_roles` | blocked — *"access to pg_catalog is blocked for security reasons"* |
+| `SELECT rolname FROM pg_roles` | **returned rows** |
+
+Same table. Same data. The only difference is whether the schema was named in the query
+text. So the restriction is a **string check on the SQL you send**, not a permission the
+database enforces — write the table name without its schema prefix and the search path
+resolves it anyway.
+
+This is worth reporting to Cockroach Labs, and the hackathon explicitly invites feedback
+on their AI tooling as an optional submission item. It also settles the design question
+more firmly than the superuser finding did: if a guardrail can be stepped around by
+rephrasing a query, it is a convenience feature, not a security boundary, and no promise
+we make to a renter can rest on it.
+
+**Worth generalising:** the assumption was flagged in the spec as needing a day-one test
+*because* the design depended on it. That habit — write down which load-bearing belief is
+unverified, then test that one first — is what made this cheap instead of expensive. And
+when a vendor's documentation and a live experiment disagree, the experiment is the fact.
+
+**What I now believe.**
+*(Tarik to fill in.)*
+
+---
+
 ## August 13, 2026 — The requirements doc was a roadmap wearing a spec's clothes
 
 **What we expected.** An 800-line requirements document with 26 numbered requirements and a

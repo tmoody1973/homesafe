@@ -1,0 +1,2 @@
+cockroachdb pw
+8JXUdPtyRtuaPUK9urcwDg
