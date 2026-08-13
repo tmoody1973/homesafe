@@ -18,12 +18,14 @@ The spec's slice is one coherent product but four independently shippable stages
 
 | Plan | Scope | Deliverable |
 |---|---|---|
-| **1 — this plan** | Cluster hardening, schema, CKAN resolution, SAM + violations + permits ingest, address resolution, evidence query | `bun run evidence "302 Sumner St"` prints real Boston records with provenance and caveats. No UI. |
-| 2 | RentSmart + 311 adapters, the fuzzy match cascade with scope badges, Next.js on Amplify, three-lane timeline | First submittable artifact |
+| **1 — this plan** | Cluster hardening, schema, CKAN resolution, SAM + violations + permits + **RentSmart** ingest, address resolution, evidence query | `bun run evidence "302 Sumner St"` prints real Boston records with provenance and caveats. No UI. |
+| 2 | 311 adapters (both schemas), the fuzzy match cascade with scope badges, Next.js on Amplify, three-lane timeline | First submittable artifact |
 | 3 | Case/observation tables, embeddings, vector index, retrieval receipts, Bedrock agent, claim validator, why-drawer | The load-bearing demo moment |
 | 4 | Packet preview, per-item consent, immutable versioning, reviewer console, negative-test screenshots | The handoff |
 
-Plan 1 deliberately takes only the **verified direct joins** — violations via `sam_id`, permits via `property_id`. 311 needs a fuzzy cascade whose correct answer is sometimes "I'm not confident," and mixing that into the foundation would make failures ambiguous. Do the certain thing first, then the uncertain thing against a known-good base.
+Plan 1 takes the **identifier joins** — violations via `sam_id`, permits via `property_id`, RentSmart via `parcel` → `PARCEL_ID`. 311 needs a fuzzy cascade whose correct answer is sometimes "I'm not confident," and mixing that into the foundation would make failures ambiguous. Do the certain thing first, then the uncertain thing against a known-good base.
+
+**RentSmart was added 2026-08-13, after measuring rather than assuming.** The entire violations file (17,137 rows) contains **zero** heat records and one pest record — it is overwhelmingly administrative code-compliance data. The habitability signal the demo is built on lives in RentSmart: `Heat - Excessive, Insufficient` verbatim, plus 1,716 pest records. Without it plan 1 would deliver a working timeline containing nothing in the category the demo is about, and every test would still pass. It also joins on an identifier, so grouping it with 311 was a mistake. See MOO-617 and `docs/LEARNING-LOG.md`.
 
 ---
 
@@ -38,7 +40,7 @@ Copied from the spec and project rules. Every task's requirements implicitly inc
 - **No hardcoded values.** Magic numbers and strings become named constants.
 - **No silently swallowed errors.** Every `catch` either handles or rethrows with context.
 - **`public_event.caveat` is `NOT NULL`.** A public record cannot be inserted without an explicit statement of what it does not prove.
-- **Never display owner fields.** Property Assessment and RentSmart both carry owner data. It is never selected into the resident-facing path.
+- **Never display owner fields.** Verified against live headers 2026-08-13: violations carries `contact_addr1/2`, `contact_city`, `contact_state`, `contact_zip`; permits carries `applicant`; RentSmart carries `owner`. All are dropped by `stripPersonalFields()` at ingest so they never enter the database, rather than being filtered on read.
 - **`raw_address_input` is never overwritten** by a match result.
 - **Embedding width is `VECTOR(1024)`** — measured from `amazon.titan-embed-text-v2:0`, not guessed. Relevant to plan 3; the column is declared here.
 - **Cluster:** `drying-gerbil`, id `c17dc37c-5918-4d7d-b6ea-161c9ff7304d`, org `org-3bmzs`, region `us-east-2`.
