@@ -53,6 +53,52 @@ usually narrower than the word.
 
 ---
 
+## August 13, 2026 — The dataset the demo is about contains none of the demo's data
+
+**What we expected.** That Boston's Building and Property Violations dataset — the
+enforcement record, the thing that sounds most like "official proof a landlord did something
+wrong" — would carry the heat complaints HomeSafe's whole story is built on. Plan 1 was built
+around it and permits, and deliberately deferred RentSmart to a later plan on the grounds that
+RentSmart needed fuzzy address matching.
+
+**What happened.** Counted heat records in the entire violations file, all 17,137 rows.
+
+Zero.
+
+One pest record. In the whole file. Meanwhile RentSmart, in a smaller sample, had 17 heat
+records including the literal string `Heat - Excessive, Insufficient`, plus 1,716 pest records
+— `Rodent Activity`, `Bed Bugs`, `Mice Infestation - Residential`.
+
+Violations turns out to be overwhelmingly *administrative* — `Certificate of Occupancy`,
+`Right of Entry`, `Failure to secure permit`, `Testing & Certification`. It is a record of code
+compliance, not of people being cold. The habitability signal — the part a renter actually
+lives inside — is in the dataset I had ranked as secondary and postponed.
+
+So plan 1, as scoped, would have delivered a working evidence timeline with real Boston records
+and **not one record in the category the demo is about.** Everything would have passed. Every
+test green, every join verified, the whole pipeline sound — and the deliverable would have been
+useless for the story it exists to tell.
+
+**Why I got it wrong is the interesting part.** I grouped RentSmart with 311 because both were
+described as needing address matching rather than a clean identifier join. That is true and
+irrelevant. RentSmart joins on `parcel` → `PARCEL_ID`, which is an identifier — it belonged
+with violations and permits from the start. I sorted the datasets by *how hard they look to
+join* when the question that mattered was *which one contains the thing we are looking for.*
+
+**Worth generalising:** "does this dataset join cleanly" and "does this dataset contain what we
+need" are different questions, and I only asked the first. A source's name is not its contents
+— "Building and Property Violations" sounds authoritative and is mostly paperwork. The only way
+to know what is in a dataset is to count what is in it.
+
+Also worth noting what caught it: not a test. Every test passed. It surfaced from asking an
+idle question — *"how many heat records are actually in here?"* — while reviewing something
+else. No acceptance criterion I had written would have found this.
+
+**What I now believe.**
+*(Tarik to fill in.)*
+
+---
+
 ## August 13, 2026 — Reading the real file headers found a privacy hole nobody had flagged
 
 **What we expected.** Task 5 was defensive plumbing: ask Boston's catalog for today's
