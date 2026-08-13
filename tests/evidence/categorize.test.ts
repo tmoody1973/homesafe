@@ -55,9 +55,20 @@ test("recognises the abbreviated electrical language Boston actually files", () 
   expect(categorize("Dwelling unit branch circuits.", "building_violation")).toBe("utilities");
 });
 
-test("a violation about permitting is categorised permit", () => {
-  expect(categorize("Failure to Obtain Permit", "building_violation")).toBe("permit");
-  expect(categorize("Failed to comply w PRMT terms", "building_violation")).toBe("permit");
+test("a violation about permitting is NOT categorised permit — it means the opposite", () => {
+  // `permit` is reserved for records from the permits dataset, where it means
+  // "work was authorised". These violations mean work happened WITHOUT
+  // authorisation. Sharing one badge between them would tell a resident their
+  // problem was being handled when the record says the reverse.
+  // 4,408 rows in the live violations file hit this, so it is not an edge case.
+  expect(categorize("Failure to Obtain Permit", "building_violation")).toBe("other");
+  expect(categorize("Failed to comply w PRMT terms", "building_violation")).toBe("other");
+  expect(categorize("Working Without a Permit", "building_violation")).toBe("other");
+});
+
+test("only the permits source system yields the permit category", () => {
+  expect(categorize("Replace heating system components", "building_permit")).toBe("permit");
+  expect(categorize("anything at all", "building_permit")).toBe("permit");
 });
 
 test("a hazard mentioned alongside a permit is reported as the hazard, not the paperwork", () => {
