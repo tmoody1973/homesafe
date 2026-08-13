@@ -71,8 +71,10 @@ account, not any login we define.
 1. **The app's own scoped SQL login actually scopes.** Grant it only what it needs, then
    attempt to read a table it was not granted. Must fail. Same test that killed decision
    001, run this time against a login we control.
-2. **CockroachDB vector index syntax and any enabling cluster setting.** Do not trust
-   remembered syntax; fetch current CockroachDB docs before writing the migration.
+2. ~~CockroachDB vector column syntax~~ — **RESOLVED 2026-08-13.** `VECTOR(1024)` works
+   as written on v26.2.5 with no cluster setting required. Width is enforced on insert:
+   1023 and 1025 elements are both rejected with `expected 1024 dimensions, not N`. The
+   vector *index* syntax is still unverified and belongs to plan 3.
 3. **Boston bulk CSV access from a deployed AWS environment.** The readiness doc records
    that some command-line downloads hit access controls during verification. Ingest
    locally first; only then attempt it from Lambda.

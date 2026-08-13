@@ -33,3 +33,40 @@ than producing a category that renders as a blank badge in the UI.
   address_match
   public_event
   schema_migrations
+
+
+================================================================
+MOO-603 — private-case schema. Captured 2026-08-13.
+================================================================
+
+--- 4. The vector width is enforced, not decorative ---
+CockroachDB v26.2.5 accepted VECTOR(1024) as written. Column type
+reports as `vector`. Width is checked on every insert:
+
+  1023 elements -> REJECTED: expected 1024 dimensions, not 1023
+  1024 elements -> SUCCEEDED
+  1025 elements -> REJECTED: expected 1024 dimensions, not 1025
+
+Why this matters: 1024 is Amazon Titan v2's actual output width, measured
+by calling the model. A silently-wrong width would produce garbage
+similarity scores in plan 3 rather than an error — the worst kind of bug
+for a feature whose entire job is being trustworthy.
+
+--- 5. Unknown memory types are rejected at write time ---
+  ERROR: failed to satisfy CHECK constraint (memory_type IN
+  ('resident_observation', 'agent_summary', 'policy_guidance',
+   'issue_definition'))
+
+--- 6. Deleting a case removes its private data ---
+  before delete -> observations: 1 | memory: 1
+  after delete  -> observations: 0 | memory: 0
+
+Why this matters: a deleted case cannot leave orphaned private resident
+notes or embeddings behind. Enforced by ON DELETE CASCADE, not by
+application cleanup code that might be skipped.
+
+--- Tables now present: 14 ---
+  address_entity  address_match  public_event  schema_migrations
+  user_account  housing_case  resident_observation  memory_item
+  consent_grant  evidence_packet  evidence_packet_item  task
+  agent_run  audit_log
