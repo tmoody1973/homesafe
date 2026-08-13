@@ -53,6 +53,59 @@ usually narrower than the word.
 
 ---
 
+## August 13, 2026 — Reading the real file headers found a privacy hole nobody had flagged
+
+**What we expected.** Task 5 was defensive plumbing: ask Boston's catalog for today's
+download link instead of hard-coding a filename, because Boston renames files on refresh.
+Sensible, unglamorous, five minutes.
+
+**What happened.** Three things, in ascending order of importance.
+
+**One — the paranoia was already justified.** Comparing the readiness doc written the previous
+day against live values: four of five filenames had *already* changed. `tmpwkewfc3d.csv` was
+now `tmpi6q1ybno.csv`, and so on. Hard-coding the URLs from a document written twenty-four
+hours earlier would have produced a pipeline that was broken before it ran once. The habit of
+resolving instead of memorising paid for itself the same day it was written.
+
+**Two — a column in the plan does not exist.** Since the download worked, I pulled the first
+few hundred bytes of each file and checked every column name the plan's mappers referenced.
+The violations mapper read a field called `zip`. There is no `zip` in that file. The real name
+is `violation_zip`. That would have quietly produced addresses with no postcode, weakening
+every 311 match later — a data-quality bug that degrades results rather than raising an error.
+
+**Three — and this is the one that matters — the sources carry personal data the spec had
+not accounted for.** The violations file has `contact_addr1`, `contact_addr2`, `contact_city`,
+`contact_state`, `contact_zip`: the property owner's mailing address. Permits has `applicant`:
+who filed it.
+
+The spec's rule was "never display owner fields," and it named RentSmart and Property
+Assessment as the sources that carry them. It missed these two. Worse, the plan preserved the
+*entire* source row as `raw_payload` for provenance — which would have written owner home
+addresses into a table the read-only evidence login can query.
+
+Nobody would have shown them deliberately. That is not the failure mode. The failure mode is
+that they would have been *sitting there*, one careless `SELECT *` from turning a
+housing-safety tool into a landlord-targeting one — in a project whose stated non-goals
+explicitly forbid exactly that.
+
+Fixed by dropping personal fields at ingest so they never enter the database at all, rather
+than by remembering not to select them.
+
+**What this cost:** twenty minutes. **What it would have cost:** four adapters built on a
+wrong column name, and personal data quietly accumulating in a table we had spent the whole
+morning proving was safe to read.
+
+**Worth generalising:** the plan's column names came from a summary document. The summary was
+right about most of them and wrong about one, and silent about the fields that mattered most.
+**Reading three hundred bytes of the actual file was worth more than the document that
+described it.** The same lesson as the MCP spike and the connection string, arriving for the
+third time today: the artefact beats the description of the artefact.
+
+**What I now believe.**
+*(Tarik to fill in.)*
+
+---
+
 ## August 13, 2026 — The connection string that worked in one tool broke the other
 
 **What we expected.** That a single database connection string would work everywhere. The

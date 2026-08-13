@@ -1129,6 +1129,27 @@ export function buildUpsertSql(
   ].join(" ");
 }
 
+// Boston's violations CSV carries `contact_addr1/2`, `contact_city`,
+// `contact_state`, `contact_zip` — the owner's mailing address. Permits carry
+// `applicant`. Verified against live headers 2026-08-13.
+//
+// The spec forbids showing owner data in the resident-facing path, and it named
+// only RentSmart and Property Assessment. It missed these two. Storing the whole
+// source row as `raw_payload` would write owner contact addresses into a table
+// `evidence_ro` can read — one careless SELECT from turning a housing-safety
+// tool into a landlord-targeting one.
+//
+// So personal fields are dropped at ingest and never enter the database.
+const PERSONAL_FIELD_PATTERN = /^(contact_|applicant$|owner$)/i;
+
+export function stripPersonalFields(
+  row: Record<string, string>,
+): Record<string, string> {
+  return Object.fromEntries(
+    Object.entries(row).filter(([key]) => !PERSONAL_FIELD_PATTERN.test(key)),
+  );
+}
+
 export async function upsertBatch(
   pool: Pool,
   table: string,
@@ -1941,7 +1962,7 @@ const ROW: Record<string, string> = {
   violation_stno: "302",
   violation_street: "Sumner",
   violation_suffix: "St",
-  zip: "02128",
+  violation_zip: "02128",
   sam_id: "132380",
   latitude: "42.3690",
   longitude: "-71.0380",
@@ -2014,7 +2035,7 @@ import { RESOLVER_VERSION } from "../address/resolve";
 import { caveatFor } from "../evidence/caveats";
 import { categorize } from "../evidence/categorize";
 import { batched, streamCsvRows } from "./csv-stream";
-import { BATCH_SIZE, upsertBatch } from "./upsert";
+import { BATCH_SIZE, stripPersonalFields, upsertBatch } from "./upsert";
 
 const SOURCE_SYSTEM = "building_violation";
 const SOURCE_URL =
@@ -2046,11 +2067,15 @@ function timestamp(row: Record<string, string>, key: string): Date | null {
 }
 
 function rawAddress(row: Record<string, string>): string {
+  // `violation_zip`, NOT `zip` — verified against the live CSV header
+  // 2026-08-13. The violations file has no `zip` column; it also has a
+  // `contact_zip`, which is the OWNER's mailing zip and must never be
+  // mistaken for the property's.
   return [
     trimmed(row, "violation_stno"),
     trimmed(row, "violation_street"),
     trimmed(row, "violation_suffix"),
-    trimmed(row, "zip"),
+    trimmed(row, "violation_zip"),
   ]
     .filter((part): part is string => part !== null)
     .join(" ");
@@ -2086,7 +2111,7 @@ export function toViolationEvent(
     "day",
     retrievedAt,
     SOURCE_URL,
-    JSON.stringify(row),
+    JSON.stringify(stripPersonalFields(row)),
     caveatFor(SOURCE_SYSTEM),
   ];
 
@@ -2281,7 +2306,7 @@ import { BOSTON_PACKAGES, resolveResourceUrl } from "../catalog/ckan";
 import { RESOLVER_VERSION } from "../address/resolve";
 import { caveatFor } from "../evidence/caveats";
 import { batched, streamCsvRows } from "./csv-stream";
-import { BATCH_SIZE, upsertBatch } from "./upsert";
+import { BATCH_SIZE, stripPersonalFields, upsertBatch } from "./upsert";
 import { ADDRESS_MATCH_COLUMNS, PUBLIC_EVENT_COLUMNS } from "./violations";
 
 const SOURCE_SYSTEM = "building_permit";
@@ -2346,7 +2371,7 @@ export function toPermitEvent(
     "day",
     retrievedAt,
     SOURCE_URL,
-    JSON.stringify(row),
+    JSON.stringify(stripPersonalFields(row)),
     caveatFor(SOURCE_SYSTEM),
   ];
 
