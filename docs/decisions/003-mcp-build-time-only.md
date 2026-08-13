@@ -38,6 +38,30 @@ table was created and a row written, from an AI client over HTTP.
 superusers ignore permissions. You cannot take away from an account that outranks the
 permission system.
 
+*Confirmed directly later the same day.* `SHOW GRANTS ON ROLE admin` returns:
+
+```
+  role_name |   member    | is_admin
+------------+-------------+-----------
+  admin     | managed-mcp |   true
+  admin     | root        |   true
+  admin     | tarik       |   true
+```
+
+So this is not inferred from a `rolsuper` column that reports `true` for everyone — the MCP
+login is an explicit member of `admin`, listed alongside `root`. There is no ambiguity left.
+
+**A nuance worth recording.** That grant persisted after we revoked the service account's
+*cloud* role. So the cloud role is a gate in front of SQL, but behind the gate the identity
+is always `admin`. There is no partial state: either no SQL at all, or SQL as an admin.
+
+This raises an obvious question — could we `REVOKE admin FROM "managed-mcp"` and get a
+scoped runtime MCP after all? Possibly. We are not doing it, for three reasons. It modifies
+a Cockroach-managed account, which is unsupported and may be silently re-granted on their
+side. It risks breaking the build-time MCP we do rely on. And most decisively, it would not
+change this decision anyway: the 10 KiB response ceiling below already makes MCP wrong for
+serving an evidence timeline, whatever its privileges are. Worth knowing, not worth chasing.
+
 **3. Separating databases is not enough.** Pointed at one database, it listed every
 database on the cluster and read a table in a different one. Only separating *clusters*
 creates a real boundary, because the cluster is the unit MCP is addressed by.
