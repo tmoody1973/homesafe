@@ -53,3 +53,40 @@ The spec's rule "never display owner fields" named only RentSmart and
 Property Assessment. Violations and permits carry personal data too, and the
 plan stored the ENTIRE source row as raw_payload — which would have written
 owner contact addresses into a table `evidence_ro` can read.
+
+
+================================================================
+MOO-606 — streaming and personal-field stripping. 2026-08-13.
+================================================================
+
+--- Memory stays flat on a file larger than the real one ---
+Streamed a 325 MB synthetic CSV (permits, the largest real source, is 237 MB):
+
+  rows streamed:              2,800,000
+  peak resident set size:     123,437,056 bytes (~118 MB)
+  wall clock:                 16.05s
+
+Peak memory is well under file size and does not track it, so the generator
+is genuinely streaming rather than buffering. The 237 MB permits ingest will
+not run out of memory.
+
+Also confirmed on the same run: a quoted field containing a comma survived
+parsing intact —
+  "Heat - Excessive, Insufficient"
+That is real Boston violation text, and hand-rolled CSV splitting on commas
+would have broken it into two fields.
+
+--- stripPersonalFields tested against REAL headers, not fixtures ---
+Ran the live first row of each source through it:
+
+  violations  removed: contact_addr1, contact_addr2, contact_city,
+                       contact_state, contact_zip
+  permits     removed: applicant
+  rentsmart   removed: owner
+
+  Remaining fields matching /contact|owner|applicant|mail|phone|email|name/:
+              NONE, in all three sources.
+
+RentSmart's `owner` field was the one the spec HAD flagged; violations' and
+permits' were the ones it missed. All three are now handled by the same
+function, so the owner's home address never reaches the database at all.
