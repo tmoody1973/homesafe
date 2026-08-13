@@ -140,7 +140,8 @@ sync with what actually happened.
 | CockroachDB as persistent memory | Case state, observations, consent grants, packet versions, tasks, receipts, audit log, and embeddings all live in one cluster |
 | CockroachDB tool 1 | **Distributed Vector Indexing** — `VECTOR(1024)` on `memory_item`, consent-filtered semantic recall |
 | CockroachDB tool 2 | **Managed MCP Server** — build-time schema design, migration verification, query profiling, and audit-log reads from Claude Code. Not in the runtime path; see decisions/003 |
-| CockroachDB tool 3 | **`ccloud` CLI** — cluster provisioning, migrations, reproducible seed |
+| CockroachDB tool 3 | **`ccloud` CLI** — cluster provisioning, service accounts, role grants, reproducible seed. Already used to run the day-one MCP spike |
+| CockroachDB tool 4 | **Agent Skills Repo** — 30 official skills installed (`author: cockroachdb`). `hardening-user-privileges` performs the least-privilege work the security model depends on; `cockroachdb-sql` for schema and query design; `configuring-audit-logging` and `auditing-cloud-cluster-security` for the observability story; `profiling-statement-fingerprints` for the timeline query budget. Load-bearing, not decorative |
 | AWS requirement | **Bedrock** (chat + embeddings), **Amplify Hosting** (the deployed app), **Lambda** (ingestion), **S3** (raw source snapshots) |
 
 ---
