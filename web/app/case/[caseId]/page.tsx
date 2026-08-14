@@ -1,10 +1,13 @@
-import { Alert } from "@heroui/react";
-import { notFound } from "next/navigation";
+import { Alert, Button, Link } from "@heroui/react";
+import { notFound, redirect } from "next/navigation";
 import { caseHeaderFor, latestAnswerFor, observationsFor } from "../../../lib/case";
+import { readSession } from "../../../lib/session";
 import { timelineFor } from "../../../lib/evidence";
 import { AnalysisLane } from "../../components/AnalysisLane";
+import { AskForm, NoteForm } from "../../components/CaseForms";
 import { NotesLane } from "../../components/NotesLane";
 import { ThreeLanes } from "../../components/ThreeLanes";
+import { signOutAction } from "../../actions";
 
 // Per request by nature: this page reads a resident's live case as `app_rw`.
 export const dynamic = "force-dynamic";
@@ -15,11 +18,17 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
   const { caseId } = await props.params;
   if (!UUID.test(caseId)) notFound();
 
+  const session = await readSession();
+  if (!session) redirect("/signin");
+
   const header = await caseHeaderFor(caseId);
   if (header === null) notFound();
+  // Knowing the URL is not owning the case. A stranger's session sees the
+  // same 404 as a case that does not exist — not a hint that it does.
+  if (header.userId !== session.userId) notFound();
 
   const [notes, answer, publicRecords] = await Promise.all([
-    observationsFor(caseId, header.userId),
+    observationsFor(caseId, session.userId),
     latestAnswerFor(caseId),
     header.samAddressId === null
       ? Promise.resolve([])
@@ -28,12 +37,20 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-12">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold">{header.rawAddress}</h1>
-        <p className="text-muted">
-          {header.issueCategory} · {notes.length} note{notes.length === 1 ? "" : "s"} ·{" "}
-          {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"}
-        </p>
+      <header className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <Link href="/me">← Your cases</Link>
+          <h1 className="text-3xl font-semibold">{header.rawAddress}</h1>
+          <p className="text-muted">
+            {header.issueCategory} · {notes.length} note{notes.length === 1 ? "" : "s"} ·{" "}
+            {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"}
+          </p>
+        </div>
+        <form action={signOutAction}>
+          <Button size="sm" type="submit" variant="ghost">
+            Sign out
+          </Button>
+        </form>
       </header>
 
       {header.samAddressId === null && (
@@ -53,9 +70,19 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
       )}
 
       <ThreeLanes
-        analysis={<AnalysisLane answer={answer} />}
+        analysis={
+          <div className="flex flex-col gap-6">
+            <AskForm caseId={caseId} />
+            <AnalysisLane answer={answer} />
+          </div>
+        }
         items={publicRecords}
-        notes={<NotesLane notes={notes} />}
+        notes={
+          <div className="flex flex-col gap-6">
+            <NoteForm caseId={caseId} />
+            <NotesLane notes={notes} />
+          </div>
+        }
       />
     </main>
   );

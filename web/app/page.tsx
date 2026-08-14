@@ -76,6 +76,10 @@ export default async function Home(props: PageProps<"/">) {
           What the City of Boston has on record about a home — with what each record does
           not prove stated alongside it.
         </p>
+        <p>
+          <Link href="/signin">Sign in</Link> to keep private notes about your own home and
+          ask questions that answer with receipts.
+        </p>
       </header>
 
       <form className="flex flex-col gap-3" method="get">
