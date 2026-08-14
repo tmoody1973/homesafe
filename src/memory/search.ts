@@ -132,6 +132,23 @@ async function countExcluded(
   ];
 }
 
+// With 79 statute chunks in global memory, law can crowd a resident's own
+// notes out of the top results. Statutes keep at most MAX_POLICY_HITS slots.
+// Dropping fetched rows is forbidden for CONSENT rows — that taboo is about
+// holding someone's private data — but these are public law; trimming them
+// after ranking leaks nothing about anyone.
+const MAX_POLICY_HITS = 3;
+
+function capPolicy(hits: MemoryHit[], limit: number): MemoryHit[] {
+  let policySeen = 0;
+  const kept = hits.filter((hit) => {
+    if (hit.memoryType !== "policy_guidance") return true;
+    policySeen += 1;
+    return policySeen <= MAX_POLICY_HITS;
+  });
+  return kept.slice(0, limit);
+}
+
 export async function searchCaseMemory(
   search: MemorySearch,
 ): Promise<MemorySearchResult> {
@@ -140,11 +157,12 @@ export async function searchCaseMemory(
     toVectorLiteral(search.queryVector),
     search.caseId,
     search.userId,
-    search.limit,
+    // Overfetch so capping statutes still fills the page with personal rows.
+    search.limit + MAX_POLICY_HITS,
     isReviewer,
   ]);
   return {
-    hits: rows.map(toHit),
+    hits: capPolicy(rows.map(toHit), search.limit),
     excluded: await countExcluded(search.caseId, search.userId, isReviewer),
     consentFilterApplied: VISIBLE_WHERE,
   };

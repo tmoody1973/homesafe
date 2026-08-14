@@ -12,6 +12,7 @@
 // re-running after an edit never leaves a stale rule behind.
 
 import rulesFile from "../../data/policy/mass-housing-rules.json";
+import codeFile from "../../data/policy/sanitary-code-410.json";
 import { appPool } from "../db/pool";
 import { embed } from "../memory/embed";
 
@@ -31,6 +32,34 @@ export function policyBody(rule: PolicyRule): string {
   );
 }
 
+type CodeSection = {
+  readonly section: string;
+  readonly title: string;
+  readonly text: string;
+  readonly source_name: string;
+  readonly source_url: string;
+};
+
+// Two tiers, honestly labelled. The curated rules are human-written plain
+// English; the code sections are the EXACT regulatory wording, extracted
+// mechanically from the official mass.gov document — no paraphrase for the
+// model to inherit as if it were law.
+function codeBody(section: CodeSection): string {
+  return (
+    `MASSACHUSETTS SANITARY CODE ${section.section} — ${section.title}: ${section.text} ` +
+    `(Source: ${section.source_name}, ${section.source_url} — exact regulatory text, not attorney-reviewed.)`
+  );
+}
+
+async function insertPolicy(body: string): Promise<void> {
+  const vector = await embed(body);
+  await appPool().query(
+    `INSERT INTO memory_item (case_id, memory_type, body, embedding, consent_scope)
+     VALUES (NULL, 'policy_guidance', $1, $2::VECTOR, 'public_rule')`,
+    [body, `[${vector.join(",")}]`],
+  );
+}
+
 export async function ingestPolicyRules(): Promise<number> {
   const rules = (rulesFile as { rules: PolicyRule[] }).rules;
   for (const rule of rules) {
@@ -39,19 +68,13 @@ export async function ingestPolicyRules(): Promise<number> {
       throw new Error(`Rule ${rule.id} has no honest review_status`);
     }
   }
+  const sections = (codeFile as { sections: CodeSection[] }).sections;
   await appPool().query(
     "DELETE FROM memory_item WHERE memory_type = 'policy_guidance' AND case_id IS NULL",
   );
-  for (const rule of rules) {
-    const body = policyBody(rule);
-    const vector = await embed(body);
-    await appPool().query(
-      `INSERT INTO memory_item (case_id, memory_type, body, embedding, consent_scope)
-       VALUES (NULL, 'policy_guidance', $1, $2::VECTOR, 'public_rule')`,
-      [body, `[${vector.join(",")}]`],
-    );
-  }
-  return rules.length;
+  for (const rule of rules) await insertPolicy(policyBody(rule));
+  for (const section of sections) await insertPolicy(codeBody(section));
+  return rules.length + sections.length;
 }
 
 if (import.meta.main) {
