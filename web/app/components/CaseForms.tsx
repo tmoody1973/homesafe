@@ -3,6 +3,7 @@
 import { Button, Checkbox, Input, Label, TextArea, TextField } from "@heroui/react";
 import { useFormStatus } from "react-dom";
 import { addNoteAction, askAgentAction } from "../actions";
+import { PhotoInput } from "./PhotoInput";
 
 // The agent turn is measured at 10-12 seconds. A button that goes quiet for
 // that long reads as broken, so both forms show their pending state.
@@ -27,6 +28,7 @@ export function NoteForm({ caseId }: { readonly caseId: string }) {
           rows={3}
         />
       </TextField>
+      <PhotoInput />
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs text-muted">Dated automatically. Only you can see it.</p>
         <SubmitButton busy="Saving…" idle="Save note" />

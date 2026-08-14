@@ -40,6 +40,8 @@ export type CaseHeader = {
   readonly rawAddress: string;
   readonly samAddressId: number | null;
   readonly issueCategory: string;
+  readonly lat: number | null;
+  readonly lon: number | null;
 };
 
 export type AnswerSection = {
@@ -84,6 +86,8 @@ type CaseRow = {
   raw_address_input: string;
   sam_address_id: string | null;
   issue_category: string;
+  lat: string | null;
+  lon: string | null;
 };
 
 type RunRow = {
@@ -98,7 +102,8 @@ type RunRow = {
 export function caseHeaderFor(caseId: string): Promise<CaseHeader | null> {
   return withVerifiedLogin(async () => {
     const { rows } = await appPool().query<CaseRow>(
-      `SELECT c.case_id, c.user_id, c.raw_address_input, a.sam_address_id, c.issue_category
+      `SELECT c.case_id, c.user_id, c.raw_address_input, a.sam_address_id, c.issue_category,
+              a.lat, a.lon
        FROM housing_case c
        LEFT JOIN address_entity a ON a.address_entity_id = c.address_entity_id
        WHERE c.case_id = $1`,
@@ -112,12 +117,40 @@ export function caseHeaderFor(caseId: string): Promise<CaseHeader | null> {
       rawAddress: row.raw_address_input,
       samAddressId: row.sam_address_id === null ? null : Number(row.sam_address_id),
       issueCategory: row.issue_category,
+      lat: row.lat === null ? null : Number(row.lat),
+      lon: row.lon === null ? null : Number(row.lon),
     };
   });
 }
 
-export function observationsFor(caseId: string, userId: string): Promise<Observation[]> {
-  return withVerifiedLogin(() => listObservations(caseId, userId));
+export type ObservationWithPhotos = Observation & { readonly photoIds: string[] };
+
+export function observationsFor(
+  caseId: string,
+  userId: string,
+): Promise<ObservationWithPhotos[]> {
+  return withVerifiedLogin(async () => {
+    const notes = await listObservations(caseId, userId);
+    if (notes.length === 0) return [];
+    const { rows } = await appPool().query<{ observation_id: string; photo_id: string }>(
+      `SELECT p.observation_id, p.photo_id
+       FROM observation_photo p
+       WHERE p.case_id = $1
+         AND p.case_id IN (SELECT case_id FROM housing_case WHERE user_id = $2)
+       ORDER BY p.created_at`,
+      [caseId, userId],
+    );
+    const byObservation = new Map<string, string[]>();
+    for (const row of rows) {
+      const list = byObservation.get(row.observation_id) ?? [];
+      list.push(row.photo_id);
+      byObservation.set(row.observation_id, list);
+    }
+    return notes.map((note) => ({
+      ...note,
+      photoIds: byObservation.get(note.observationId) ?? [],
+    }));
+  });
 }
 
 // The prose shown is the validated prose, never the model's raw output. A

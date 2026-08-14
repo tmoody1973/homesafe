@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { caseHeaderFor, latestAnswerFor, observationsFor } from "../../../lib/case";
 import { readSession } from "../../../lib/session";
 import { timelineFor } from "../../../lib/evidence";
+import { AddressMap } from "../../components/AddressMap";
 import { AnalysisLane } from "../../components/AnalysisLane";
 import { AskForm, NoteForm } from "../../components/CaseForms";
 import { NotesLane } from "../../components/NotesLane";
@@ -52,6 +53,10 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
           </Button>
         </form>
       </header>
+
+      {header.lat !== null && header.lon !== null && (
+        <AddressMap lat={header.lat} lon={header.lon} label={header.rawAddress} />
+      )}
 
       {header.samAddressId === null && (
         // FR-01: the application never silently picks an address. A case with

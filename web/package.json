@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroui/react": "^3.2.4",
     "@heroui/styles": "^3.2.4",
+    "@react-stately/data": "^3.16.1",
     "next": "16.3.1",
     "pg": "^8.23.0",
     "react": "19.2.8",

@@ -1,6 +1,7 @@
-import { Alert, Button, Card, Chip, Input, Label, Link, TextField } from "@heroui/react";
+import { Button, Card, Chip, Link } from "@heroui/react";
 import { redirect } from "next/navigation";
-import { createCaseAction, findAddressAction, signOutAction } from "../actions";
+import { signOutAction } from "../actions";
+import { AddressAutocomplete } from "../components/AddressAutocomplete";
 import { candidatesFor } from "../../lib/evidence";
 import { appPool } from "../../../src/db/pool";
 import { readSession } from "../../lib/session";
@@ -47,54 +48,9 @@ function CaseList({ cases }: { readonly cases: readonly CaseRow[] }) {
   );
 }
 
-// FR-01 on screen: several candidates render as several buttons, and the
-// resident presses one. Nothing is chosen for them.
-async function CandidatePicker({ query }: { readonly query: string }) {
-  const candidates = await candidatesFor(query);
-  if (candidates.length === 0) {
-    return (
-      <Alert status="warning">
-        <Alert.Indicator />
-        <Alert.Content>
-          <Alert.Title>No Boston address matched</Alert.Title>
-          <Alert.Description>
-            Try the street number and name, like &ldquo;302 Sumner St&rdquo;.
-          </Alert.Description>
-        </Alert.Content>
-      </Alert>
-    );
-  }
-  return (
-    <div className="flex flex-col gap-3">
-      <p className="text-sm text-muted">
-        {candidates.length === 1
-          ? "One match — confirm it is yours:"
-          : `${candidates.length} matches. Only you know which is your home — pick it:`}
-      </p>
-      <ul className="flex flex-col gap-2">
-        {candidates.map((candidate) => (
-          <li key={candidate.samAddressId}>
-            <form action={createCaseAction}>
-              <input name="raw_address" type="hidden" value={query} />
-              <input name="sam_address_id" type="hidden" value={candidate.samAddressId} />
-              <input name="issue_category" type="hidden" value="heat" />
-              <Button className="w-full justify-start" type="submit" variant="secondary">
-                {candidate.fullAddress}
-              </Button>
-            </form>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default async function MePage(props: {
-  searchParams: Promise<{ q?: string }>;
-}) {
+export default async function MePage() {
   const session = await readSession();
   if (!session) redirect("/signin");
-  const { q } = await props.searchParams;
   const cases = await myCases(session.userId);
 
   return (
@@ -118,14 +74,7 @@ export default async function MePage(props: {
 
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Start a case</h2>
-        <form action={findAddressAction} className="flex items-end gap-3">
-          <TextField className="flex-1" defaultValue={q} isRequired name="raw_address">
-            <Label>Your Boston address</Label>
-            <Input placeholder="302 Sumner St" />
-          </TextField>
-          <Button type="submit">Find it</Button>
-        </form>
-        {q && <CandidatePicker query={q} />}
+        <AddressAutocomplete />
       </section>
     </main>
   );

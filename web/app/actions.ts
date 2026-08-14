@@ -10,7 +10,6 @@ import { runAgentTurn } from "../../src/agent/converse";
 import { createCase, createResident } from "../../src/case/cases";
 import { addObservation } from "../../src/memory/observations";
 import { appPool } from "../../src/db/pool";
-import { candidatesFor } from "../lib/evidence";
 import { clearSession, createSession, readSession, type Session } from "../lib/session";
 
 async function requireSession(): Promise<Session> {
@@ -42,38 +41,46 @@ export async function signOutAction(): Promise<void> {
   redirect("/");
 }
 
-// Two-step on purpose (FR-01): this action only finds candidates. The
-// resident picks one; the app never picks for them.
-export async function findAddressAction(formData: FormData): Promise<void> {
-  await requireSession();
-  const rawAddress = String(formData.get("raw_address") ?? "").trim();
-  if (rawAddress === "") redirect("/me");
-  redirect(`/me?q=${encodeURIComponent(rawAddress)}`);
-}
-
 export async function createCaseAction(formData: FormData): Promise<void> {
   const session = await requireSession();
-  const rawAddress = String(formData.get("raw_address") ?? "").trim();
   const samAddressId = Number(formData.get("sam_address_id"));
-  if (rawAddress === "" || !Number.isInteger(samAddressId) || samAddressId <= 0) {
-    redirect("/me");
-  }
-  // Re-resolve on the server: the sam id must be one of the candidates for
-  // the typed address, not whatever number arrived in the form.
-  const candidates = await candidatesFor(rawAddress);
-  const chosen = candidates.find((c) => c.samAddressId === samAddressId);
-  if (!chosen) redirect("/me");
-  const { rows } = await appPool().query<{ address_entity_id: string }>(
-    "SELECT address_entity_id FROM address_entity WHERE sam_address_id = $1",
+  if (!Number.isInteger(samAddressId) || samAddressId <= 0) redirect("/me");
+  // The server looks the address up itself and stores the canonical form, so
+  // a tampered form can at worst attach a real public address the visitor
+  // could have picked anyway — never an address that does not exist.
+  const { rows } = await appPool().query<{
+    address_entity_id: string;
+    full_address: string;
+  }>(
+    "SELECT address_entity_id, full_address FROM address_entity WHERE sam_address_id = $1",
     [samAddressId],
   );
+  const found = rows[0];
+  if (!found) redirect("/me");
   const caseId = await createCase({
     userId: session.userId,
-    rawAddress,
-    addressEntityId: rows[0]?.address_entity_id ?? null,
+    rawAddress: found!.full_address,
+    addressEntityId: found!.address_entity_id,
     issueCategory: String(formData.get("issue_category") ?? "other"),
   });
   redirect(`/case/${caseId}`);
+}
+
+const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
+
+// The photo arrives already re-encoded by the browser's canvas, which strips
+// EXIF metadata — including the GPS position phones embed in every shot. The
+// AI never sees it: no embedding, no description. The resident's own words
+// are the only caption.
+async function savePhoto(caseId: string, observationId: string, photo: File): Promise<void> {
+  if (photo.size === 0 || photo.size > MAX_PHOTO_BYTES) return;
+  if (!photo.type.startsWith("image/")) return;
+  const content = Buffer.from(await photo.arrayBuffer());
+  await appPool().query(
+    `INSERT INTO observation_photo (observation_id, case_id, content_type, content, byte_size)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [observationId, caseId, photo.type, content, content.length],
+  );
 }
 
 export async function addNoteAction(formData: FormData): Promise<void> {
@@ -81,7 +88,11 @@ export async function addNoteAction(formData: FormData): Promise<void> {
   await requireCaseOwner(caseId);
   const body = String(formData.get("body") ?? "").trim();
   if (body === "") return;
-  await addObservation({ caseId, body, category: null });
+  const { observationId } = await addObservation({ caseId, body, category: null });
+  const photo = formData.get("photo");
+  if (photo instanceof File && photo.size > 0) {
+    await savePhoto(caseId, observationId, photo);
+  }
   revalidatePath(`/case/${caseId}`);
 }
 
