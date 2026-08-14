@@ -6,7 +6,11 @@
 //
 // Nothing here is ever written by the model.
 
-export type ItemKind = "resident_observation" | "agent_memory" | "public_event";
+export type ItemKind =
+  | "resident_observation"
+  | "agent_memory"
+  | "policy_guidance"
+  | "public_event";
 
 export type ActorRole = "resident" | "reviewer";
 

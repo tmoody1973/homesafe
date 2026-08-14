@@ -21,6 +21,11 @@ const OBSERVATION_CAVEAT =
 const AGENT_MEMORY_CAVEAT =
   "HomeSafe's own earlier conclusion — a record of past reasoning, not a source of new facts.";
 
+const POLICY_CAVEAT =
+  "An official rule as published at the linked source. Whether it applies to your exact situation may require legal help. Not yet attorney-reviewed.";
+
+const URL_PATTERN = /https?:\/\/[^\s)]+/;
+
 export type RetrievalObserved = {
   readonly caseId: string;
   readonly actor: ReceiptActor;
@@ -30,23 +35,43 @@ export type RetrievalObserved = {
   readonly evidenceExcluded?: Excluded[];
 };
 
+function memoryKind(hit: MemorySearchResult["hits"][number]): ReceiptItem["kind"] {
+  if (hit.ref.startsWith("obs_")) return "resident_observation";
+  return hit.memoryType === "policy_guidance" ? "policy_guidance" : "agent_memory";
+}
+
+const MEMORY_CAVEATS: Record<string, string> = {
+  resident_observation: OBSERVATION_CAVEAT,
+  agent_memory: AGENT_MEMORY_CAVEAT,
+  policy_guidance: POLICY_CAVEAT,
+};
+
+function memoryReason(kind: ReceiptItem["kind"], question: string): string {
+  if (kind === "resident_observation") return `Closest stored note to "${question}"`;
+  if (kind === "policy_guidance")
+    return `A Massachusetts rule closest in meaning to "${question}"`;
+  return `The agent's own earlier conclusion, closest in meaning to "${question}"`;
+}
+
 function memoryItemFrom(
   hit: MemorySearchResult["hits"][number],
   question: string,
 ): ReceiptItem {
-  const isObservation = hit.ref.startsWith("obs_");
+  const kind = memoryKind(hit);
   return {
     ref: hit.ref,
-    kind: isObservation ? "resident_observation" : "agent_memory",
+    kind,
     display_text: hit.body,
     consent_state: hit.consentScope,
     recorded_at: hit.createdAt.toISOString(),
     surfaced_by: "vector_similarity",
     vector_distance: hit.distance,
-    retrieval_reason: isObservation
-      ? `Closest stored note to "${question}"`
-      : `The agent's own earlier conclusion, closest in meaning to "${question}"`,
-    caveat: isObservation ? OBSERVATION_CAVEAT : AGENT_MEMORY_CAVEAT,
+    retrieval_reason: memoryReason(kind, question),
+    caveat: MEMORY_CAVEATS[kind]!,
+    // A rule that cannot be checked at its source is an assertion. The URL
+    // travels in the body from the curated file; surface it as a real link.
+    source_url:
+      kind === "policy_guidance" ? hit.body.match(URL_PATTERN)?.[0] : undefined,
   };
 }
 

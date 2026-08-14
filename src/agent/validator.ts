@@ -50,6 +50,8 @@ const LANE_BY_KIND: Record<ReceiptItem["kind"], Lane> = {
   // words — putting them in the resident lane would dress the agent's voice
   // in Maya's.
   agent_memory: "analysis",
+  // A statute is nobody's testimony; it renders as analysis with its source.
+  policy_guidance: "analysis",
 };
 
 function refsIn(sentence: string): string[] {

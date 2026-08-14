@@ -1,0 +1,69 @@
+{
+  "_readme": "Curated Massachusetts housing rules for HomeSafe's policy_guidance memory. Every entry was verified against the linked source on 2026-08-14. These are quotations from and plain-language summaries of public law — government edicts carry no copyright. REVIEW STATUS: not yet attorney-reviewed; every entry says so on its face and the ingest refuses entries missing that flag.",
+  "rules": [
+    {
+      "id": "heat-temperatures",
+      "title": "Minimum heat temperatures and heating season",
+      "rule": "During the heating season — September 15 through May 31 — landlords must provide heat of at least 68°F between 7:00 AM and 11:00 PM, and at least 64°F overnight (11:01 PM to 6:59 AM), in every habitable room and every room with a toilet, shower, or bathtub. The system must not push any room above 78°F. Temperature is measured five feet above the floor, more than five feet from an exterior wall. A local board of health may shift the season slightly.",
+      "source_name": "105 CMR 410.180 (State Sanitary Code, amended 2023)",
+      "source_url": "https://www.law.cornell.edu/regulations/massachusetts/105-CMR-410-180",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "hot-water",
+      "title": "Hot water requirements",
+      "rule": "Landlords must provide hot water between 110°F and 130°F at fixtures, and between 110°F and 120°F at a bathtub or shower.",
+      "source_name": "105 CMR 410.150 / 410.190 (State Sanitary Code)",
+      "source_url": "https://www.law.cornell.edu/regulations/massachusetts/105-CMR-410-190",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "pest-responsibility",
+      "title": "Who is responsible for pests",
+      "rule": "In a building with two or more units, the owner must keep the residence and premises free from infestation and is responsible for pest elimination. The owner must also inspect each unit for pests before a new tenant moves in.",
+      "source_name": "105 CMR 410.550 (State Sanitary Code)",
+      "source_url": "https://www.law.cornell.edu/regulations/massachusetts/105-CMR-410-550",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "repair-and-deduct",
+      "title": "Repair and deduct",
+      "rule": "If a board of health or (in Boston) a housing inspector certifies violations that endanger health or safety, and the owner has been notified in writing but does not begin repairs within 5 days and substantially complete them within 14 days, a tenant may arrange repairs and deduct the cost from rent — capped at four months' rent in any twelve-month period. This does not apply to damage caused by the tenant or their guests.",
+      "source_name": "Mass. General Laws c.111 §127L",
+      "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVI/Chapter111/Section127L",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "rent-withholding",
+      "title": "Rent withholding for bad conditions",
+      "rule": "A tenant may withhold some rent when serious code violations exist, if the landlord knows about the conditions (for example through written notice or an inspection report), the tenant did not cause them, and the tenant follows the statute's process. Withholding has legal risk if done incorrectly — a court can require rent to be deposited with the court. Getting advice first is strongly recommended.",
+      "source_name": "Mass. General Laws c.239 §8A",
+      "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartIII/TitleIII/Chapter239/Section8A",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "retaliation-protection",
+      "title": "Protection from landlord retaliation",
+      "rule": "A landlord may not raise rent, end a tenancy, or refuse renewal because a tenant reported code violations to the landlord or a government agency, joined a tenant organization, or lawfully withheld rent. If a landlord takes such action within six months of the tenant's protected act, the law presumes it was retaliation and the landlord must prove otherwise.",
+      "source_name": "Mass. General Laws c.186 §18",
+      "source_url": "https://malegislature.gov/Laws/GeneralLaws/PartII/TitleI/Chapter186/Section18",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "boston-rental-registry",
+      "title": "Boston rental registration and inspections",
+      "rule": "Boston requires rental property owners to register their units with the Inspectional Services Department every year by July 1, and requires an inspection of rental units on a recurring cycle. Boston also maintains a public Chronic Offender Registry for landlords who repeatedly fail to correct problems. Housing complaints can be filed by calling 311; most ISD housing inspections happen because a tenant complained.",
+      "source_name": "City of Boston rental inspection ordinance; Boston ISD",
+      "source_url": "https://www.boston.gov/departments/inspectional-services/inspecting-housing-boston",
+      "review_status": "not yet attorney-reviewed"
+    },
+    {
+      "id": "how-to-get-an-inspection",
+      "title": "How to request a city inspection in Boston",
+      "rule": "Any Boston tenant can request a free housing inspection by calling 311 or contacting the Inspectional Services Department. If the inspector finds violations, the city issues an order to the owner to correct them — and that written violation record is exactly what later remedies (like repair-and-deduct) are built on.",
+      "source_name": "Boston Inspectional Services Department",
+      "source_url": "https://www.boston.gov/departments/inspectional-services/tenant-rights-and-responsibilities",
+      "review_status": "not yet attorney-reviewed"
+    }
+  ]
+}

@@ -60,11 +60,15 @@ const VISIBLE_WHERE = [
   CONSENT_PREDICATE,
 ].join("\n    AND ");
 
+// Policy rows are Massachusetts rules — global, case_id NULL, secret to
+// nobody. They join every search by meaning; the ownership and consent
+// predicates still guard everything that belongs to a person.
 export const SEARCH_SQL = `
   SELECT memory_id, source_observation_id, body, memory_type, consent_scope,
          created_at, embedding <-> $1::VECTOR AS distance
   FROM memory_item
-  WHERE ${VISIBLE_WHERE}
+  WHERE (${VISIBLE_WHERE})
+     OR (memory_type = 'policy_guidance' AND case_id IS NULL)
   ORDER BY embedding <-> $1::VECTOR
   LIMIT $4
 `;

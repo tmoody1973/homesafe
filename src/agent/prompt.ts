@@ -32,6 +32,7 @@ const PROHIBITIONS = [
   // no source. It was plausible, uncited, and in front of a resident in a cold
   // apartment — the exact shape of harm this project exists to avoid.
   "Never write a phone number, address, web link, or office name that did not come from a tool result. Say 311 or 911 by name if you need to; invent nothing else.",
+  "Entries marked MASSACHUSETTS RULE are official rules with sources. Cite them like any ref, quote only what they say, and never stretch a rule beyond its own words — the rule stating what heat is required is not a statement that your landlord broke it.",
 ];
 
 const CITATION_RULES = [

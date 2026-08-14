@@ -10,6 +10,7 @@ type Props = {
 const KIND_LABELS: Record<RenderedItem["kind"], string> = {
   resident_observation: "Your own note",
   agent_memory: "Something HomeSafe stored",
+  policy_guidance: "Massachusetts rule",
   public_event: "Boston public record",
 };
 
@@ -44,7 +45,9 @@ function ReadItem({ item }: { readonly item: RenderedItem }) {
             rel="noopener noreferrer"
             target="_blank"
           >
-            Check it yourself in the City of Boston&rsquo;s published data
+            {item.kind === "policy_guidance"
+              ? "Read the rule at its official source"
+              : "Check it yourself in the City of Boston\u2019s published data"}
           </a>
         )}
         <p className="font-mono text-xs text-muted">{item.ref}</p>
