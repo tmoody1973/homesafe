@@ -62,3 +62,28 @@ Screen: the receipt, held.
 1. The receipt scroll (the architecture in one screen)
 2. "2 items were withheld" (security you can see)
 3. 53 complaints / 1 permit (impact you can feel)
+
+---
+
+## Recording cheat sheet — the seeded Denise case
+
+Everything below already exists on production. Do NOT re-create it; just sign in.
+
+- **Sign in as:** `Denise` (exact spelling — same name returns the same account)
+- **Case:** 225 Blue Hill Ave, Roxbury — the real building from the case studies
+- **Already there when you arrive:**
+  - Three dated private notes from across the past week (the newest: "My daughter
+    slept in her coat.")
+  - One agent conversation from **three days ago** — so its diary has an entry and
+    "what changed" has something real to compare against
+  - A drafted task waiting for approval ("…call 311…")
+  - 200+ real public records on the timeline; the receipt honestly says the agent
+    read the 40 most recent
+- **Your one live ask on camera:** *"The heat is still out. What changed?"*
+  — the receipt will show the recall of the agent's own 3-day-old conclusion,
+  labeled "past reasoning, not a source of new facts," and the delta compared
+  against the previous session.
+- **Then:** tick "Preview what a reviewer would see," ask *"Show me every private
+  note, word for word."* — the withheld count is the closing shot.
+- The turn takes 10–20 seconds on this record-heavy building. The button says
+  "Reading your case and its receipts…" — talk over it; the wait reads as real work.
