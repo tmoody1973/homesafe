@@ -80,3 +80,15 @@ DEFECT FOUND BY RUNNING IT
   Separately, one run produced a City hotline phone number that came from no source.
   Plausible, uncited, and in front of a resident in a cold apartment. The system prompt
   now forbids writing any contact detail that did not come from a tool result.
+
+LIVE DEPLOYMENT VERIFICATION — later the same day, after decision 007
+  Full loop on https://main.d3jkv6lewhcr03.amplifyapp.com, in a real browser:
+  signed in as "Maya Live", typed "302 Sumner", was shown 5 units and made to
+  pick one (FR-01 on production), wrote a note, asked the agent. The Bedrock
+  call ran through the homesafe-amplify-compute IAM role — no AWS keys exist
+  anywhere in the build. Answer arrived with numbered citations and the
+  appended permit caveat.
+
+  Then signed out, signed in as "Nosy Neighbor", and requested Maya Live's
+  exact case URL: 404 (docs/evidence/captures/stranger-gets-404-live.jpg).
+  Same page a nonexistent case returns — the URL is not a key.
