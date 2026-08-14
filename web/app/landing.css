@@ -124,8 +124,11 @@
 .hs-photo img {
   display: block;
   width: 100%;
-  max-height: 30rem;
+  aspect-ratio: 21 / 9;
   object-fit: cover;
+  /* Favor the lower half: rooflines and windows live there, empty sky does
+     not. The first crop centered on the sky and showed almost no houses. */
+  object-position: 30% center;
 }
 .hs-photo figcaption {
   font-size: 0.8125rem;

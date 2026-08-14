@@ -98,12 +98,12 @@ export default async function Home(props: PageProps<"/">) {
       <figure className="hs-photo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          alt="Rooflines of multi-family homes in a Boston residential neighborhood under an overcast sky"
+          alt="A long row of brick apartment buildings with bay windows and window air conditioners in Boston"
           src="/boston-homes.jpg"
         />
         <figcaption className="hs-wrap">
           The housing stock the records describe: triple-deckers and multi-family homes.
-          Photo: Zixi Zhou, Unsplash.
+          Photo: Brett Wharton, Unsplash.
         </figcaption>
       </figure>
 
