@@ -67,12 +67,15 @@ export function ThreeLanes({ items }: { readonly items: readonly EvidenceItem[] 
       </Tabs.ListContainer>
 
       <Tabs.Panel className="pt-6" id="public">
+        <h2 className="sr-only">Public record</h2>
         <PublicLane items={items} />
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="notes">
+        <h2 className="sr-only">Your notes</h2>
         <ComingLater what="Your own notes about this home will appear here, kept private to you." />
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="analysis">
+        <h2 className="sr-only">HomeSafe analysis</h2>
         <ComingLater what="HomeSafe's read of these records will appear here, with a citation for every claim it makes." />
       </Tabs.Panel>
     </Tabs>

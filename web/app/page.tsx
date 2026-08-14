@@ -40,6 +40,7 @@ function Candidates({ candidates, query }: {
           </Alert.Content>
         </Alert>
       )}
+      <h2 className="sr-only">Matching addresses</h2>
       <ul className="flex flex-col gap-3">
         {candidates.map((candidate) => (
           <li key={candidate.samAddressId}>

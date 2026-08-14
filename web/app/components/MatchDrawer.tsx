@@ -36,15 +36,17 @@ export function MatchDrawer({
 
   return (
     <Disclosure isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-      <Disclosure.Heading>
-        {/* HeroUI's own Button, not a raw <button>. The raw element rendered
-            and clicked fine but never toggled the disclosure — the trigger
-            wiring lives in their component. */}
-        <Button size="sm" slot="trigger" variant="ghost">
-          Why is this record here?
-          <Disclosure.Indicator />
-        </Button>
-      </Disclosure.Heading>
+      {/* HeroUI's own Button, not a raw <button>: the raw element rendered and
+          clicked fine but never toggled the disclosure — the trigger wiring
+          lives in their component.
+          Deliberately NOT wrapped in Disclosure.Heading, which renders an <h3>.
+          That put seven identical "Why is this record here?" headings at the
+          same level as the record titles, so a screen reader's heading list was
+          mostly noise. This is a control, not a section heading. */}
+      <Button size="sm" slot="trigger" variant="ghost">
+        Why is this record here?
+        <Disclosure.Indicator />
+      </Button>
       <Disclosure.Content>
         <Disclosure.Body className="mt-3 flex flex-col gap-3 rounded-xl bg-surface p-4 text-sm">
           <p>
