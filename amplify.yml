@@ -30,14 +30,23 @@ applications:
             # runtime probe on the deployed site reported every one of them
             # ABSENT — including AMPLIFY_MONOREPO_APP_ROOT, which is certainly
             # set — so the server rendering the page could not reach the
-            # database. Writing the one variable it needs into .env.production
-            # is how Next.js carries it into the server bundle.
+            # database. Writing what it needs into .env.production is how
+            # Next.js carries values into the server bundle.
             #
-            # ONLY the read-only credential. DATABASE_URL_APP is deliberately
-            # never written here: app_rw can write residents' private notes and
-            # consent records, and this tier faces the public internet. An
-            # unused credential is still a credential that leaked.
+            # DATABASE_URL_APP ships as of decision 007 — a deliberate reversal
+            # of the plan-3 rule, made when the app gained sign-in. The case
+            # pages serve behind a signed session, every action re-checks
+            # ownership in SQL, and app_rw still cannot touch audit_log or
+            # public evidence. See docs/decisions/007-app-credential-on-amplify.md.
+            #
+            # AWS credentials are deliberately NOT here: Bedrock access comes
+            # from the SSR compute role (homesafe-amplify-compute), which can
+            # invoke exactly two models and nothing else. AWS_REGION arrives
+            # renamed because Amplify reserves the plain name.
             - echo "DATABASE_URL_EVIDENCE=$DATABASE_URL_EVIDENCE" > .env.production
+            - echo "DATABASE_URL_APP=$DATABASE_URL_APP" >> .env.production
+            - echo "SESSION_SECRET=$SESSION_SECRET" >> .env.production
+            - echo "AWS_REGION=$APP_AWS_REGION" >> .env.production
         build:
           commands:
             - export PATH="$HOME/.bun/bin:$PATH"
