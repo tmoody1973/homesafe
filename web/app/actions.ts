@@ -7,7 +7,7 @@
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { runAgentTurn } from "../../src/agent/converse";
-import { createCase, createResident } from "../../src/case/cases";
+import { createCase, findOrCreateResident } from "../../src/case/cases";
 import { addObservation } from "../../src/memory/observations";
 import { appPool } from "../../src/db/pool";
 import { clearSession, createSession, readSession, type Session } from "../lib/session";
@@ -31,7 +31,7 @@ async function requireCaseOwner(caseId: string): Promise<Session> {
 export async function signInAction(formData: FormData): Promise<void> {
   const displayName = String(formData.get("display_name") ?? "").trim();
   if (displayName === "") redirect("/signin");
-  const userId = await createResident(displayName);
+  const userId = await findOrCreateResident(displayName);
   await createSession({ userId, displayName, role: "resident" });
   redirect("/me");
 }

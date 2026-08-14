@@ -27,6 +27,21 @@ type ObservationRow = {
   recorded_at: Date;
 };
 
+// Demo-grade sign-in, deliberately: the same name returns the same account,
+// so a resident can leave and come back — which is the whole memory story.
+// The security boundary was never the name; it is the signed cookie this id
+// rides in and the ownership checks in every query.
+export async function findOrCreateResident(displayName: string): Promise<string> {
+  const { rows } = await appPool().query<{ user_id: string }>(
+    `SELECT user_id FROM user_account
+     WHERE display_name = $1 AND role = 'resident'
+     ORDER BY created_at LIMIT 1`,
+    [displayName],
+  );
+  if (rows[0]) return rows[0].user_id;
+  return createResident(displayName);
+}
+
 export async function createResident(displayName: string): Promise<string> {
   const { rows } = await appPool().query<{ user_id: string }>(
     `INSERT INTO user_account (display_name, role) VALUES ($1, 'resident')

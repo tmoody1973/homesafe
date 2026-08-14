@@ -170,8 +170,16 @@ async function prefetch(
     }),
     timelineForCase(context.caseId, context.userId),
   ]);
-  return { memory, evidence };
+  // A record-heavy building (225 Blue Hill Ave carries 200+) would push the
+  // whole timeline into the model's context: measured 2026-08-14 at 19.9s
+  // against the 12s budget. The agent reads the most recent slice; the
+  // receipt stays honest because it is built from this same array — it lists
+  // exactly what was given to the model, not the building's full history,
+  // and the UI timeline still shows everything.
+  return { memory, evidence: evidence.slice(0, AGENT_EVIDENCE_LIMIT) };
 }
+
+const AGENT_EVIDENCE_LIMIT = 40;
 
 // Ownership is checked in SQL here too: the SAM id is read only from a case
 // this user owns. `evidence_ro` then reads the records themselves.
@@ -229,7 +237,21 @@ async function converseUntilAnswer(
     const uses = toolUses(content);
     const final = uses.find((use) => use.name === "final_answer");
     if (final) return sectionsFrom(final.input);
-    if (uses.length === 0) return emptySections();
+    if (uses.length === 0) {
+      // On heavy contexts the model sometimes writes its answer as prose
+      // instead of calling final_answer (observed live on a 200-record
+      // building). Prose can't be validated section by section, so nudge
+      // once per round rather than surrendering to "could not verify".
+      messages.push({
+        role: "user",
+        content: [
+          {
+            text: "Call the final_answer tool now with your four sections. Do not reply in plain text.",
+          },
+        ],
+      });
+      continue;
+    }
 
     const results = await Promise.all(
       uses.map((use) => answerToolUse(use, context, observed)),

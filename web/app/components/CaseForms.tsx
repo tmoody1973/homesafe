@@ -54,7 +54,7 @@ export function AskForm({ caseId }: { readonly caseId: string }) {
             Preview what a reviewer would see
           </Checkbox.Content>
         </Checkbox>
-        <SubmitButton busy="Reading your case… up to 15 seconds" idle="Ask" />
+        <SubmitButton busy="Reading your case and its receipts…" idle="Ask" />
       </div>
     </form>
   );
