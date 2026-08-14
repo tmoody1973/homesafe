@@ -7,7 +7,10 @@ Built for the [CockroachDB × AWS Hackathon](https://cockroachdb-ai.devpost.com/
 
 - **Live demo:** https://main.d3jkv6lewhcr03.amplifyapp.com — sign in with just a name and
   try the whole loop
-- **Plain-English explainer:** [docs/WHAT-IS-HOMESAFE.md](docs/WHAT-IS-HOMESAFE.md)
+- **Architecture diagram:** [live](https://main.d3jkv6lewhcr03.amplifyapp.com/architecture.html) · [docs/architecture.html](docs/architecture.html)
+- **Demo video:** coming before submission (script: [docs/VIDEO-SCRIPT.md](docs/VIDEO-SCRIPT.md))
+- **Plain-English explainer:** [docs/WHAT-IS-HOMESAFE.md](docs/WHAT-IS-HOMESAFE.md) · real-building
+  case studies: [docs/CASE-STUDIES.md](docs/CASE-STUDIES.md)
 - **License:** MIT
 
 ## The idea in one paragraph
@@ -19,6 +22,22 @@ complaints), lets the resident keep private dated notes, and puts an agent on to
 answers questions — with a twist. **The agent cannot describe its own memory.** Every answer
 ships with a receipt written by the retrieval layer, and a validator deletes any sentence
 citing a source that was never read. The why-panel is a receipt, not a story.
+
+## What a resident actually gets
+
+- **A journal that stands up** — dated private notes, with photos described by the resident
+  (the AI never analyzes images) and EXIF location data stripped in the browser before an
+  image leaves the phone.
+- **Their building's paper trail** — address autocomplete over all 399,452 Boston addresses,
+  a pinned map from the city's own coordinates, and every record labeled with match
+  confidence and what it does not prove.
+- **Answers with receipts** — the agent cites the resident's notes, the city's records, and
+  Massachusetts law; the "Why do I remember this?" drawer shows exactly what was read.
+- **A printable case file** — journal + records + sources, formatted for paper, to hand to
+  311, a housing counselor, or a court clerk. (Consent-gated in-app sharing is the next
+  slice; see the deviations section.)
+- **Drafted next steps** — the agent's suggested action becomes a task awaiting the
+  resident's approval. It proposes; the person decides.
 
 ## What the agent's memory actually does
 
@@ -33,6 +52,13 @@ the mechanism that makes the agent trustworthy:
   survived validation may be memorised. Next session it recalls its own prior reasoning,
   and the receipt labels it honestly: *"a record of past reasoning, not a source of new
   facts."*
+- **The law as memory.** 87 `policy_guidance` rows in three honestly-labeled tiers: curated
+  plain-English rules verified against primary sources, the **entire 105 CMR 410 sanitary
+  code** as exact regulatory text from the state's own document, and referral entries (our
+  words, nothing reproduced) pointing to the Legal Tactics legal-aid guide. Retrieved by
+  meaning, cited to the section, linked to the official source, and capped at 3 search
+  slots so statutes never crowd out a resident's own notes. Every entry says
+  "not yet attorney-reviewed" on its face.
 - **Task state.** Each answer's "possible next human step" becomes a draft `task` row —
   written by code from the validated output, never by a model tool. The agent proposes;
   the resident approves or dismisses. Store, retrieve, **act**.
@@ -77,6 +103,9 @@ the mechanism that makes the agent trustworthy:
 
 ## Architecture
 
+A visual version lives at [docs/architecture.html](docs/architecture.html) (also served
+[live](https://main.d3jkv6lewhcr03.amplifyapp.com/architecture.html)). The short text form:
+
 ```
 Boston Open Data (CKAN) ──ingest (bun, idempotent upserts)──▶ CockroachDB  (drying-gerbil, AWS us-east-2)
                                                               ├─ public tables   ◀─ evidence_ro (SELECT only)
@@ -105,13 +134,14 @@ bun install && cd web && bun install && cd ..
 #   AWS_REGION=us-east-1
 #   SESSION_SECRET=$(openssl rand -hex 32)
 
-bun run migrate                  # applies db/migrations/001..006
+bun run migrate                  # applies db/migrations/001..008
 bun run src/ingest/sam.ts        # Boston addresses (~399k rows)
 bun run src/ingest/violations.ts # building violations
 bun run src/ingest/permits.ts    # building permits (~660k rows, streams a 237MB CSV)
 bun run src/ingest/rentsmart.ts  # RentSmart housing signals
+bun run src/policy/ingest.ts     # Massachusetts housing law -> policy_guidance memory
 
-bun test                         # 188 tests; several hit the live DB and Bedrock
+bun test                         # 191 tests; several hit the live DB and Bedrock
 bun run evidence "302 Sumner St" # CLI timeline sanity check
 cd web && bun run dev            # the app
 ```
