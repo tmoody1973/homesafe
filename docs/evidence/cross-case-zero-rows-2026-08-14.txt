@@ -1,0 +1,8 @@
+Searching Maya's case memory AS MAYA:       2 results
+Searching Maya's case memory AS A STRANGER: 0 results
+Stranger response, in full: {"hits":[],"excluded":[{"reason":"revoked_by_resident","count":0},{"reason":"not_shared_by_resident","count":0}]}
+
+Captured 2026-08-14. Case 26598947-b599-493b-b98d-6d529b143b7e holds two private
+notes. The stranger's response above is printed IN FULL: no rows, no text, no
+embedding, and the withheld counts are zero because the ownership predicate
+removed the whole case from view before any counting happened. Spec §9.1.
