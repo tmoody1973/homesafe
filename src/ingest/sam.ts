@@ -4,9 +4,10 @@
 // building, and the failure reads as "no records at this address" rather than as
 // an error — so nothing about this file guesses.
 
-import { Pool } from "pg";
+import type { Pool } from "pg";
 import { BOSTON_PACKAGES, resolveResourceUrl } from "../catalog/ckan";
 import { batched, streamCsvRows } from "./csv-stream";
+import { ingestPool } from "./pool";
 import { BATCH_SIZE, upsertBatch } from "./upsert";
 
 export const ADDRESS_ENTITY_COLUMNS = [
@@ -94,11 +95,7 @@ async function* mapped(
 }
 
 // The pool is injected rather than taken from src/db/pool.ts because neither
-// application login may write here: migration 003 grants `app_rw` SELECT only on
-// address_entity, on purpose, so application code can never alter the public
-// record it cites as evidence. Ingestion is an offline pipeline, so it connects
-// as the same admin identity that runs migrations — and the ingest credential
-// never reaches an application code path.
+// application login may write here — see src/ingest/pool.ts for the reasoning.
 export async function ingestSam(
   csvStream: NodeJS.ReadableStream,
   snapshotAt: Date,
@@ -118,22 +115,6 @@ export async function ingestSam(
     );
   }
   return { upserted, skipped: skipped.count };
-}
-
-const INGEST_MAX_CLIENTS = 5;
-
-function ingestPool(): Pool {
-  const connectionString = process.env.DATABASE_URL_ADMIN;
-  if (!connectionString) {
-    throw new Error("DATABASE_URL_ADMIN is required to ingest public evidence");
-  }
-  // Stated here, not in the URL: node-postgres reads `sslrootcert=system` as a
-  // filename and fails with ENOENT, so .env omits it. Same reasoning as pool.ts.
-  return new Pool({
-    connectionString,
-    max: INGEST_MAX_CLIENTS,
-    ssl: { rejectUnauthorized: true },
-  });
 }
 
 async function openSamCsv(): Promise<NodeJS.ReadableStream> {
