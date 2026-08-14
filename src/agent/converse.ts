@@ -28,14 +28,17 @@ import { MODEL_SECTIONS, RESPONSE_SCHEMA, systemPrompt } from "./prompt";
 import { TOOL_SPECS, runTool, type ToolContext } from "./tools";
 import { validate, type ValidationResult } from "./validator";
 
-// Decision 006. Tarik's call. The override exists because access to a Bedrock
-// model is a per-model AWS Marketplace subscription, separate from the IAM
-// permission to call Bedrock at all — and on 2026-08-14 this account could
-// invoke Sonnet 4.5 and was refused Sonnet 5 on that ground. The default here
-// states the decision; the override lets a run be pinned somewhere else
-// without the choice being made silently by whatever string is in the code.
+// Decision 006. Tarik's call, twice: Sonnet 5 first, then Sonnet 4.5 once the
+// cost of getting it was clear. Sonnet 5 has no AWS Marketplace agreement on
+// this account (`agreementAvailability: NOT_AVAILABLE`, against a control of
+// AVAILABLE for this model), and creating one means signing a billing
+// agreement as account root — the credential MOO-599 exists to remove.
+//
+// The override stays so a run can be pinned elsewhere deliberately, rather
+// than the model being decided by whatever string happens to be here.
 export const MODEL_ID =
-  process.env.BEDROCK_MODEL_ID?.trim() || "us.anthropic.claude-sonnet-5";
+  process.env.BEDROCK_MODEL_ID?.trim() ||
+  "us.anthropic.claude-sonnet-4-5-20250929-v1:0";
 
 const MAX_ROUNDS = 8;
 const MAX_TOKENS = 800;

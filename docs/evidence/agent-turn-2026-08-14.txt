@@ -2,9 +2,11 @@ HomeSafe — live agent turn evidence
 Captured 2026-08-14. Every number below came from running the code, not from a plan.
 
 MODEL
-  Decision 006 chose us.anthropic.claude-sonnet-5.
-  Measured with us.anthropic.claude-sonnet-4-5-20250929-v1:0, because this account
-  is refused Sonnet 5:
+  Decision 006 ended on us.anthropic.claude-sonnet-4-5-20250929-v1:0, which is what
+  every number below was measured on. Sonnet 5 was chosen first and reversed the same
+  afternoon; the reason is here.
+
+  Sonnet 5 is refused by this account:
 
     us.anthropic.claude-sonnet-5                    tools=false  FAILED AccessDeniedException
     us.anthropic.claude-sonnet-5                    tools=true   FAILED AccessDeniedException
@@ -18,6 +20,21 @@ MODEL
   The control is the second pair: the same credential, the same region, the same tool
   config, a different model id, and it succeeds. So this is a per-model subscription,
   not a broken call or a missing Bedrock permission.
+
+  Confirmed directly, again with a control:
+
+    anthropic.claude-sonnet-5          agreementAvailability: NOT_AVAILABLE
+    anthropic.claude-sonnet-4-5-...    agreementAvailability: AVAILABLE
+
+  Both report authorizationStatus AUTHORIZED, entitlementAvailability AVAILABLE and
+  regionAvailability AVAILABLE. One thing is missing, for one model.
+
+  The confusing part explained: the FIRST Sonnet 5 call succeeded and every later one
+  failed, which reads like a flaky service. AWS documents the opposite — the first
+  invocation starts a Marketplace subscription in the background, calls may succeed for
+  up to fifteen minutes while it settles, and once it fails every later call returns
+  AccessDeniedException. The success that arrived before the failures was evidence OF
+  the failure, not against it.
 
 TURN LATENCY — budget 12,000 ms
   Before prefetch, discovery through tools:
