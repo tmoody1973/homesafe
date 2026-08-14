@@ -6,7 +6,14 @@ import {
   CONSENT_PREDICATE,
   SEARCH_SQL,
   searchCaseMemory,
+  type MemorySearchResult,
 } from "../../src/memory/search";
+
+// Massachusetts rules are global memory and appear for everyone — that is
+// their job. Every privacy assertion below is about PERSONAL rows.
+function personal(result: MemorySearchResult) {
+  return result.hits.filter((hit) => hit.memoryType !== "policy_guidance");
+}
 
 const created: string[] = [];
 
@@ -56,8 +63,8 @@ test("case A's memory is invisible to user B — no rows, no text, no counts", a
     limit: 10,
   });
 
-  expect(asOwner.hits.length).toBeGreaterThan(0);
-  expect(asStranger.hits).toHaveLength(0);
+  expect(personal(asOwner).length).toBeGreaterThan(0);
+  expect(personal(asStranger)).toHaveLength(0);
   expect(JSON.stringify(asStranger)).not.toContain("No heat since Tuesday");
   expect(asStranger.excluded.every((entry) => entry.count === 0)).toBe(true);
 });
@@ -90,7 +97,7 @@ test("a reviewer sees no private item, and is told how many were withheld", asyn
     viewerRole: "reviewer",
   });
 
-  expect(asReviewer.hits).toHaveLength(0);
+  expect(personal(asReviewer)).toHaveLength(0);
   const withheld = asReviewer.excluded.find((e) => e.reason === "not_shared_by_resident");
   expect(withheld?.count).toBeGreaterThan(0);
   expect(JSON.stringify(asReviewer)).not.toContain("bathroom ceiling");
@@ -114,7 +121,7 @@ test("revoked memory is withheld and counted, never returned", async () => {
     limit: 10,
   });
 
-  expect(result.hits).toHaveLength(0);
+  expect(personal(result)).toHaveLength(0);
   const revoked = result.excluded.find((e) => e.reason === "revoked_by_resident");
   expect(revoked?.count).toBe(1);
 });
