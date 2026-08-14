@@ -1,0 +1,22 @@
+=== HomeSafe deploy-identity boundary test — 2026-08-14T14:17:01Z ===
+Decision 004: deploying uses a separate identity, so the running app can
+never redeploy the site it runs on. Each check below can only fail for the
+reason claimed — a denial with another possible explanation is not evidence.
+
+--- 1. POSITIVE CONTROL: homesafe-deploy CAN list Amplify apps ---
+ALLOWED (exit 0, no apps yet — the call itself is authorized)
+
+--- 2. homesafe-deploy CANNOT call Bedrock ---
+
+An error occurred (AccessDeniedException) when calling the InvokeModel operation: User: arn:aws:iam::953791390715:user/homesafe-deploy is not authorized to perform: bedrock:InvokeModel on resource: arn:aws:bedrock:us-east-1:953791390715:inference-profile/us.anthropic.claude-sonnet-4-5-20250929-v1:0 because no identity-based policy allows the bedrock:InvokeModel action
+
+--- 3. CONTROL: homesafe-dev CAN call Bedrock (same call, runtime identity) ---
+ALLOWED — so check 2's denial is about permissions, not a malformed call
+
+--- 4. homesafe-dev STILL CANNOT deploy (unchanged by this work) ---
+
+An error occurred (AccessDeniedException) when calling the ListApps operation: User: arn:aws:iam::953791390715:user/homesafe-dev is not authorized to perform: amplify:ListApps on resource: arn:aws:amplify:us-east-1:953791390715:apps/* because no identity-based policy allows the amplify:ListApps action
+
+--- 5. homesafe-deploy CANNOT reach S3 ---
+
+An error occurred (AccessDenied) when calling the ListBuckets operation: User: arn:aws:iam::953791390715:user/homesafe-deploy is not authorized to perform: s3:ListAllMyBuckets because no identity-based policy allows the s3:ListAllMyBuckets action
