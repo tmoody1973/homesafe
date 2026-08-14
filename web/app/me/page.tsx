@@ -1,6 +1,5 @@
 import { Button, Card, Chip, Link } from "@heroui/react";
 import { redirect } from "next/navigation";
-import { signOutAction } from "../actions";
 import { AddressAutocomplete } from "../components/AddressAutocomplete";
 import { candidatesFor } from "../../lib/evidence";
 import { appPool } from "../../../src/db/pool";
@@ -55,16 +54,9 @@ export default async function MePage() {
 
   return (
     <main className="mx-auto flex max-w-2xl flex-col gap-8 px-6 py-12">
-      <header className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <h1 className="text-3xl font-semibold">Hi, {session.displayName}</h1>
-          <p className="text-muted">Your cases live here. Only you can see them.</p>
-        </div>
-        <form action={signOutAction}>
-          <Button size="sm" type="submit" variant="ghost">
-            Sign out
-          </Button>
-        </form>
+      <header className="flex flex-col gap-1">
+        <h1 className="text-3xl font-semibold">Hi, {session.displayName}</h1>
+        <p className="text-muted">Your cases live here. Only you can see them.</p>
       </header>
 
       <section className="flex flex-col gap-3">

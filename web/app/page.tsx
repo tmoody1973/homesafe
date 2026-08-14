@@ -77,8 +77,8 @@ export default async function Home(props: PageProps<"/">) {
           not prove stated alongside it.
         </p>
         <p>
-          <Link href="/signin">Sign in</Link> to keep private notes about your own home and
-          ask questions that answer with receipts.
+          Sign in — top right — to keep private notes about your own home and ask
+          questions that answer with receipts.
         </p>
       </header>
 

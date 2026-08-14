@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SiteHeader } from "./components/SiteHeader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       {/* HeroUI's own theme tokens, so the page canvas and its components stay
           in one colour system. See globals.css. */}
       <body className="flex min-h-full flex-col bg-background text-foreground">
+        <SiteHeader />
         {children}
       </body>
     </html>

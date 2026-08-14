@@ -1,4 +1,4 @@
-import { Alert, Button, Link } from "@heroui/react";
+import { Alert, Link } from "@heroui/react";
 import { notFound, redirect } from "next/navigation";
 import { caseHeaderFor, latestAnswerFor, observationsFor, tasksFor } from "../../../lib/case";
 import { readSession } from "../../../lib/session";
@@ -9,7 +9,6 @@ import { AskForm, NoteForm } from "../../components/CaseForms";
 import { NotesLane } from "../../components/NotesLane";
 import { TaskList } from "../../components/TaskList";
 import { ThreeLanes } from "../../components/ThreeLanes";
-import { signOutAction } from "../../actions";
 
 // Per request by nature: this page reads a resident's live case as `app_rw`.
 export const dynamic = "force-dynamic";
@@ -40,20 +39,13 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
 
   return (
     <main className="mx-auto flex max-w-3xl flex-col gap-8 px-6 py-12">
-      <header className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-2">
-          <Link href="/me">← Your cases</Link>
-          <h1 className="text-3xl font-semibold">{header.rawAddress}</h1>
-          <p className="text-muted">
-            {header.issueCategory} · {notes.length} note{notes.length === 1 ? "" : "s"} ·{" "}
-            {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"}
-          </p>
-        </div>
-        <form action={signOutAction}>
-          <Button size="sm" type="submit" variant="ghost">
-            Sign out
-          </Button>
-        </form>
+      <header className="flex flex-col gap-2">
+        <Link href="/me">← Your cases</Link>
+        <h1 className="text-3xl font-semibold">{header.rawAddress}</h1>
+        <p className="text-muted">
+          {header.issueCategory} · {notes.length} note{notes.length === 1 ? "" : "s"} ·{" "}
+          {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"}
+        </p>
       </header>
 
       {header.lat !== null && header.lon !== null && (
