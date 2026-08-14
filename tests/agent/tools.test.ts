@@ -50,11 +50,11 @@ test("no sharing or review tool exists under any name", () => {
 });
 
 test("resolve_address returns every candidate and refuses to choose", async () => {
-  const result = (await runTool("resolve_address", { raw_address: "302 Sumner" }, {
+  const result = ((await runTool("resolve_address", { raw_address: "302 Sumner" }, {
     caseId: "unused",
     userId: "unused",
     role: "resident",
-  })) as { candidates: unknown[]; resident_must_choose: boolean };
+  })).model) as { candidates: unknown[]; resident_must_choose: boolean };
   expect(result.candidates.length).toBeGreaterThan(1);
   expect(result.resident_must_choose).toBe(true);
 });
@@ -62,11 +62,12 @@ test("resolve_address returns every candidate and refuses to choose", async () =
 // The point of the boundary: this is a missing GRANT, not a filter here.
 test("get_public_timeline cannot return a private note even for its own case", async () => {
   const { caseId, userId } = await seedCaseWithNote();
-  const result = await runTool(
+  const outcome = await runTool(
     "get_public_timeline",
     { sam_address_id: SAM_ADDRESS_ID },
     { caseId, userId, role: "resident" },
   );
+  const result = outcome.model;
   const asText = JSON.stringify(result);
   expect(asText).not.toContain(PRIVATE_NOTE);
   expect(asText).not.toContain("radiator");
@@ -74,11 +75,11 @@ test("get_public_timeline cannot return a private note even for its own case", a
 });
 
 test("create_packet_draft produces a draft and shares nothing", async () => {
-  const result = (await runTool(
+  const result = ((await runTool(
     "create_packet_draft",
     { item_refs: ["evt_1", "obs_2"], note: "for the inspector" },
     { caseId: "unused", userId: "unused", role: "resident" },
-  )) as { status: string; shared: boolean };
+  )).model) as { status: string; shared: boolean };
   expect(result.status).toBe("draft");
   expect(result.shared).toBe(false);
 });
