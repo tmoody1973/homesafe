@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { loadEnv } from "../../src/config/env";
+import { loadEnv, requireEnv } from "../../src/config/env";
 
 test("returns a typed Env when every variable is present", () => {
   const env = loadEnv({
@@ -25,4 +25,23 @@ test("rejects a blank variable the same as a missing one", () => {
       AWS_REGION: "us-east-1",
     }),
   ).toThrow(/DATABASE_URL_APP/);
+});
+
+// The read-only web tier must be able to start holding ONLY the evidence
+// credential. Requiring all three would have forced the public runtime to carry
+// app_rw, the login that can write residents' private notes.
+test("each connection requires only its own variable", () => {
+  const evidenceOnly = { DATABASE_URL_EVIDENCE: "postgresql://evidence_ro@host/db" };
+  expect(requireEnv(evidenceOnly, "DATABASE_URL_EVIDENCE")).toBe(
+    "postgresql://evidence_ro@host/db",
+  );
+  expect(() => requireEnv(evidenceOnly, "DATABASE_URL_APP")).toThrow(
+    /DATABASE_URL_APP/,
+  );
+});
+
+test("a blank value is missing, not present", () => {
+  expect(() => requireEnv({ DATABASE_URL_APP: "   " }, "DATABASE_URL_APP")).toThrow(
+    /DATABASE_URL_APP/,
+  );
 });

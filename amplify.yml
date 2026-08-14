@@ -26,6 +26,18 @@ applications:
             # fails on a clean checkout with "Module not found: Can't resolve 'pg'".
             - cd .. && bun install --frozen-lockfile && cd web
             - bun install --frozen-lockfile
+            # Amplify's console environment variables are BUILD-time only. A
+            # runtime probe on the deployed site reported every one of them
+            # ABSENT — including AMPLIFY_MONOREPO_APP_ROOT, which is certainly
+            # set — so the server rendering the page could not reach the
+            # database. Writing the one variable it needs into .env.production
+            # is how Next.js carries it into the server bundle.
+            #
+            # ONLY the read-only credential. DATABASE_URL_APP is deliberately
+            # never written here: app_rw can write residents' private notes and
+            # consent records, and this tier faces the public internet. An
+            # unused credential is still a credential that leaked.
+            - echo "DATABASE_URL_EVIDENCE=$DATABASE_URL_EVIDENCE" > .env.production
         build:
           commands:
             - export PATH="$HOME/.bun/bin:$PATH"

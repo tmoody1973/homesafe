@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { loadEnv } from "../config/env";
+import { requireEnv } from "../config/env";
 
 const MAX_CLIENTS = 5;
 
@@ -19,12 +19,12 @@ function makePool(connectionString: string): Pool {
 }
 
 export function appPool(): Pool {
-  app ??= makePool(loadEnv(process.env).appDatabaseUrl);
+  app ??= makePool(requireEnv(process.env, "DATABASE_URL_APP"));
   return app;
 }
 
 export function evidencePool(): Pool {
-  evidence ??= makePool(loadEnv(process.env).evidenceDatabaseUrl);
+  evidence ??= makePool(requireEnv(process.env, "DATABASE_URL_EVIDENCE"));
   return evidence;
 }
 
