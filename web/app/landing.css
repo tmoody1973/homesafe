@@ -115,6 +115,24 @@
   color: var(--color-neutral);
 }
 
+/* ---- The one photograph: a full-width band, hairline-ruled, honestly
+   captioned. Real Boston rental housing — not Beacon Hill postcard brick. ---- */
+.hs-photo {
+  border-top: var(--rule);
+  margin: 0;
+}
+.hs-photo img {
+  display: block;
+  width: 100%;
+  max-height: 30rem;
+  object-fit: cover;
+}
+.hs-photo figcaption {
+  font-size: 0.8125rem;
+  color: var(--color-neutral);
+  padding-block: var(--space-sm);
+}
+
 /* ---- Search section keeps the app's live form beside editorial copy ---- */
 .hs-search-grid {
   display: grid;

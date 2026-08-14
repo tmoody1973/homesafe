@@ -65,7 +65,7 @@ export function NotesLane({ notes }: { readonly notes: readonly ObservationWithP
               )}
               {note.photoIds.length > 0 && (
                 <p className="text-xs text-muted">
-                  Your photo, described by you — HomeSafe does not analyse images.
+                  Your photo, described by you. HomeSafe does not analyze images.
                 </p>
               )}
             </Card.Content>

@@ -29,7 +29,7 @@ function PublicLane({ items }: { readonly items: readonly EvidenceItem[] }) {
           <Alert.Title>No public records found for this address</Alert.Title>
           <Alert.Description>
             This is not an all-clear. It means the City of Boston has published nothing we
-            could tie to this address — a problem can exist without ever having been reported.
+            could tie to this address. A problem can exist without ever having been reported.
           </Alert.Description>
         </Alert.Content>
       </Alert>

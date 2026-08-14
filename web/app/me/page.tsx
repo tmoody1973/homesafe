@@ -25,7 +25,7 @@ async function myCases(userId: string): Promise<CaseRow[]> {
 
 function CaseList({ cases }: { readonly cases: readonly CaseRow[] }) {
   if (cases.length === 0) {
-    return <p className="text-muted">No cases yet — start one with your address below.</p>;
+    return <p className="text-muted">No cases yet. Start one with your address below.</p>;
   }
   return (
     <ul className="flex flex-col gap-3">

@@ -51,7 +51,7 @@ export function AnalysisLane({ answer }: { readonly answer: LatestAnswer | null 
         <Alert.Content>
           <Alert.Title>Nothing asked yet</Alert.Title>
           <Alert.Description>
-            When you ask HomeSafe a question, its answer appears here — with a receipt of
+            When you ask HomeSafe a question, its answer appears here, with a receipt of
             everything it read to write it.
           </Alert.Description>
         </Alert.Content>
@@ -88,7 +88,7 @@ export function AnalysisLane({ answer }: { readonly answer: LatestAnswer | null 
       <p className="text-xs text-muted">
         Answered by {answer.modelId}
         {answer.latencyMs !== null && ` in ${(answer.latencyMs / 1000).toFixed(1)} seconds`}.
-        The numbers are citations — every one is in the receipt above.
+        The numbers are citations; every one is in the receipt above.
       </p>
     </div>
   );

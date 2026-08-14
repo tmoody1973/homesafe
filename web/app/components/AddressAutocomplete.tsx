@@ -97,7 +97,7 @@ export function AddressAutocomplete() {
               renderEmptyState={() => (
                 <EmptyState>
                   {list.filterText.trim().length < 3
-                    ? "Keep typing — three letters starts the search"
+                    ? "Keep typing; three letters starts the search"
                     : "No Boston address matches that"}
                 </EmptyState>
               )}
@@ -121,7 +121,7 @@ export function AddressAutocomplete() {
         </Autocomplete.Popover>
       </Autocomplete>
       <p className="text-xs text-muted">
-        Every unit is its own entry — pick yours. HomeSafe never guesses between units.
+        Every unit is its own entry, and you pick yours. HomeSafe never guesses between units.
       </p>
     </div>
   );

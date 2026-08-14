@@ -51,8 +51,7 @@ export default async function CaseFilePage(props: PageProps<"/case/[caseId]/file
         <p className="text-sm text-muted">
           Resident statements are the resident&rsquo;s own words and are marked as such.
           Public records come from the City of Boston&rsquo;s published datasets; each entry
-          states what it does not prove. Assembled by HomeSafe (homesafe — CockroachDB × AWS
-          hackathon build).
+          states what it does not prove. Assembled by HomeSafe, a CockroachDB × AWS hackathon build.
         </p>
       </header>
 
@@ -90,7 +89,7 @@ export default async function CaseFilePage(props: PageProps<"/case/[caseId]/file
                 {record.sourceSystem.replaceAll("_", " ")}
               </p>
               <p className="leading-relaxed">
-                {[record.title, record.description].filter(Boolean).join(" — ")}
+                {[record.title, record.description].filter(Boolean).join(": ")}
               </p>
               <p className="text-xs text-muted">
                 {record.caveat} Match: {record.addressScope}

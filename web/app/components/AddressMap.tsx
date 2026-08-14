@@ -31,7 +31,7 @@ export function AddressMap({ lat, lon, label }: Props) {
         title={`Map showing ${label}`}
       />
       <figcaption className="text-xs text-muted">
-        {label} — map ©{" "}
+        {label} · map ©{" "}
         <a
           className="underline"
           href="https://www.openstreetmap.org/copyright"

@@ -34,7 +34,7 @@ export default async function AddressTimeline(props: PageProps<"/address/[samId]
         <h1 className="text-3xl font-semibold">{fullAddress}</h1>
         <p className="text-muted">
           {items.length} public record{items.length === 1 ? "" : "s"}
-          {capped && ` — the newest ${MAX_ITEMS}; older records exist`}
+          {capped && `. Showing the newest ${MAX_ITEMS}; older records exist`}
         </p>
       </header>
 

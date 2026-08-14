@@ -63,7 +63,7 @@ function Withheld({ receipt }: Props) {
   if (receipt.withheldTotal === 0) {
     return (
       <p className="text-sm">
-        Nothing was withheld from this answer. The filter still ran — it had nothing to hold
+        Nothing was withheld from this answer. The filter still ran; it had nothing to hold
         back.
       </p>
     );

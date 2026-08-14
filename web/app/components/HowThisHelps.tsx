@@ -14,19 +14,19 @@ export function HowThisHelps({ noteCount }: { readonly noteCount: number }) {
           <li>
             <span className="font-semibold">Write down what happens, when it happens</span>{" "}
             (the <em>My journal</em> tab). A dated record beats memory. &ldquo;The heat has
-            been out a lot&rdquo; loses arguments — &ldquo;out on the 8th, 11th and 14th,
+            been out a lot&rdquo; loses arguments; &ldquo;out on the 8th, 11th and 14th,
             landlord told on the 4th, no reply&rdquo; wins them.
           </li>
           <li>
             <span className="font-semibold">See what the city already knows</span> (the{" "}
             <em>Building history</em> tab). If your building has a paper trail of
-            complaints, you are not one voice — you are part of a pattern, and patterns are
-            what inspectors act on.
+            complaints, you are not one voice. You are part of a pattern, and inspectors act
+            on patterns.
           </li>
           <li>
             <span className="font-semibold">Get answers with proof attached</span> (the{" "}
             <em>Get answers</em> tab). Every answer shows exactly where it came from, so
-            nobody — not a landlord, not a lawyer — can say you made it up.
+            nobody, landlord or lawyer, can say you made it up.
           </li>
         </ol>
         {noteCount === 0 && (

@@ -32,7 +32,7 @@ export default async function SignInPage() {
         <Alert.Content>
           <Alert.Title>Hackathon demo</Alert.Title>
           <Alert.Description>
-            No password, no email — a name is enough to try it. Everything you write stays
+            No password, no email. A name is enough to try it. Everything you write stays
             private to this session&rsquo;s account, enforced by the database, not by a promise.
           </Alert.Description>
         </Alert.Content>
