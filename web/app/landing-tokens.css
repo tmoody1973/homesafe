@@ -1,0 +1,36 @@
+/* Hallmark · genre: editorial · macrostructure: Stat-Led · theme: Newsprint
+ * enrichment: none · nav: existing app SiteHeader (preserved) · footer: Ft4 colophon
+ * tone: civic-editorial · anchor hue: 75 (warm) · accent: civic red ~30
+ * Hallmark · pre-emit critique: P4 H5 E4 S5 R5 V4
+ * Scoped under .hs-landing so HeroUI's app tokens are untouched. */
+.hs-landing {
+  --color-paper: oklch(97% 0.008 75);
+  --color-paper-2: oklch(94% 0.01 75);
+  --color-rule: oklch(84% 0.012 75);
+  --color-neutral: oklch(48% 0.012 70);
+  --color-ink: oklch(20% 0.015 60);
+  --color-accent: oklch(52% 0.19 28);
+  --color-focus: oklch(52% 0.19 28);
+
+  --font-display: var(--hs-font-newsreader), ui-serif, Georgia, serif;
+  --font-body: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: var(--font-geist-mono), ui-monospace, monospace;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  --text-body: 1.0625rem;
+  --text-lg: 1.333rem;
+  --text-xl: 1.777rem;
+  --text-2xl: 2.369rem;
+  --text-figure: clamp(2.6rem, 13.5vw, 10.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms;
+  --rule: 1px solid var(--color-rule);
+}

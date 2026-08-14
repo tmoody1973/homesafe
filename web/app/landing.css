@@ -1,0 +1,264 @@
+/* Hallmark · Stat-Led landing for HomeSafe — see landing-tokens.css for the stamp. */
+@import "./landing-tokens.css";
+
+.hs-landing {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+.hs-landing section {
+  padding-block: var(--space-3xl);
+  border-top: var(--rule);
+}
+.hs-landing section:first-of-type {
+  border-top: none;
+}
+.hs-wrap {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+/* ---- Stat hero: the figure and its words read together, left-biased ---- */
+.hs-hero {
+  padding-block: var(--space-3xl) var(--space-2xl);
+}
+.hs-hero .figure {
+  font-family: var(--font-outlier);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-figure);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.hs-hero h1 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(var(--text-xl), 4vw, var(--text-2xl));
+  line-height: 1.15;
+  max-width: 26ch;
+  margin-block: var(--space-md) var(--space-sm);
+}
+.hs-hero .qualifier {
+  color: var(--color-neutral);
+  max-width: 58ch;
+}
+.hs-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* ---- Buttons: outlined chip, one accent fill for the primary ---- */
+.hs-btn {
+  display: inline-block;
+  padding: 0.65rem 1.35rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+.hs-btn:hover {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.hs-btn--primary {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+.hs-btn--primary:hover {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+}
+.hs-landing a:focus-visible,
+.hs-landing button:focus-visible,
+.hs-landing input:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---- Section heads: hanging, roman, left ---- */
+.hs-landing h2 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  line-height: 1.12;
+  max-width: 22ch;
+  margin-bottom: var(--space-lg);
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.hs-landing h3 {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-sm);
+}
+.hs-landing .lede {
+  max-width: 62ch;
+  color: var(--color-neutral);
+}
+
+/* ---- Search section keeps the app's live form beside editorial copy ---- */
+.hs-search-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ---- How it helps: three numbered strides, uneven column, no cards ---- */
+.hs-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+}
+.hs-steps p {
+  color: var(--color-neutral);
+  max-width: 38ch;
+}
+
+/* ---- The criteria table: tabular spec sheet, hairlines only ---- */
+.hs-spec {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.hs-spec caption {
+  text-align: left;
+  color: var(--color-neutral);
+  padding-bottom: var(--space-md);
+}
+.hs-spec th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-neutral);
+  border-bottom: 1.5px solid var(--color-ink);
+  padding: var(--space-sm) var(--space-md) var(--space-sm) 0;
+}
+.hs-spec td {
+  vertical-align: top;
+  border-bottom: var(--rule);
+  padding: var(--space-md) var(--space-md) var(--space-md) 0;
+}
+.hs-spec td:first-child {
+  font-weight: 600;
+  width: 24%;
+}
+.hs-spec .req {
+  color: var(--color-neutral);
+  width: 26%;
+}
+.hs-spec mark {
+  background: transparent;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/* ---- Proof strip: four real numbers on one row ---- */
+.hs-proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+.hs-proof .n {
+  font-family: var(--font-outlier);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.1;
+}
+.hs-proof .q {
+  color: var(--color-neutral);
+  font-size: 0.9375rem;
+  max-width: 24ch;
+}
+
+/* ---- Closing CTA: one button, one sentence ---- */
+.hs-close {
+  text-align: left;
+}
+.hs-close p {
+  max-width: 48ch;
+  margin-bottom: var(--space-lg);
+}
+
+/* ---- Ft4 colophon ---- */
+.hs-colophon {
+  font-family: var(--font-outlier);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--color-neutral);
+  max-width: 72ch;
+}
+.hs-colophon a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hs-colophon a:hover {
+  color: var(--color-ink);
+}
+
+/* ---- Inline links ---- */
+.hs-landing .prose-link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.hs-landing .prose-link:hover {
+  color: var(--color-accent);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 820px) {
+  .hs-landing section {
+    padding-block: var(--space-2xl);
+  }
+  .hs-wrap {
+    padding-inline: var(--space-md);
+  }
+  .hs-search-grid,
+  .hs-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+  .hs-proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hs-spec .req {
+    display: none;
+  }
+  .hs-spec td:first-child {
+    width: 34%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-landing * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
