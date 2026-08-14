@@ -360,3 +360,36 @@ disagree.
 
 **What I now believe.**
 *(Tarik to fill in.)*
+
+---
+
+## August 14, 2026 — Four builds to deploy an empty page
+
+**What we expected.** The scaffold built clean locally in three seconds. Deploying an empty
+Next.js page is the most boring task in the plan.
+
+**What happened.** Four builds. Every failure was configuration, none was code, and the app
+never changed between attempt one and attempt four.
+
+1. `npm ci` — there is no `package-lock.json`, because this project is bun everywhere.
+2. `deploy-manifest.json` missing — the branch's `framework` was `null`, so Amplify never
+   treated it as a managed Next.js app and went looking for an adapter contract we do not use.
+3. `Cannot read 'next' version in package.json` — Amplify read the **repo root**, where the
+   backend's package.json lives, not `web/`.
+4. Green, after `AMPLIFY_MONOREPO_APP_ROOT=web`.
+
+Every one of those is invisible from a local build. `bun run build` passes identically whether
+or not Amplify knows what framework it is looking at.
+
+**Also worth keeping:** the spec put this on day 1 with the reason written down — *"first
+deploys are where hours vanish."* It was right, and it was right about the mechanism too: not
+one hard problem, four small ones that each cost a full build cycle to discover. Doing this on
+day 13 with a video to record would have been the difference between submitting and not.
+
+**Also worth keeping:** I wasted ten minutes watching an empty variable. The git push had
+already auto-triggered a build, so my manual `start-job` was rejected, `$JOB` came back empty,
+and the polling loop printed a usage error every twenty seconds without me looking at it. The
+loop had no guard for "did the thing I am polling actually start."
+
+**What I now believe.**
+*(Tarik to fill in.)*

@@ -1,0 +1,27 @@
+=== HomeSafe first Amplify deploy — 2026-08-14T14:37:12Z ===
+
+Live URL: https://main.d3jkv6lewhcr03.amplifyapp.com
+HTTP 200, 0.106430s, 11853 bytes
+
+Deployed by: homesafe-deploy (cannot call Bedrock, cannot reach S3)
+App id: d3jkv6lewhcr03   platform: WEB_COMPUTE   framework: Next.js - SSR
+
+--- four builds to get here; each failure and its cause ---
+1 FAILED  npm ci  — no package-lock.json; this project is bun
+2 FAILED  deploy-manifest.json missing — branch framework was null,
+          so Amplify did not treat it as a managed Next.js app
+3 FAILED  Cannot read 'next' version in package.json — Amplify read the
+          repo root, not web/
+4 SUCCEED after AMPLIFY_MONOREPO_APP_ROOT=web
+
+--- job history ---
+-------------------
+|    ListJobs     |
++-----+-----------+
+| id  |  status   |
++-----+-----------+
+|  1  |  FAILED   |
+|  2  |  FAILED   |
+|  3  |  FAILED   |
+|  4  |  SUCCEED  |
++-----+-----------+
