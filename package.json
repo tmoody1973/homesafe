@@ -15,6 +15,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.1110.0",
     "csv-parse": "^7.0.2",
     "pg": "^8.23.0"
   }

@@ -1,4 +1,4 @@
-import { Pool } from "pg";
+import { Pool, type PoolClient } from "pg";
 import { requireEnv } from "../config/env";
 
 const MAX_CLIENTS = 5;
@@ -26,6 +26,27 @@ export function appPool(): Pool {
 export function evidencePool(): Pool {
   evidence ??= makePool(requireEnv(process.env, "DATABASE_URL_EVIDENCE"));
   return evidence;
+}
+
+// A note that saved but never became searchable is a note the resident will
+// reasonably believe the agent has. Writes that must land together get one
+// client and one transaction rather than two hopeful statements.
+export async function withTransaction<T>(
+  pool: Pool,
+  work: (client: PoolClient) => Promise<T>,
+): Promise<T> {
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const result = await work(client);
+    await client.query("COMMIT");
+    return result;
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
 export async function closePools(): Promise<void> {
