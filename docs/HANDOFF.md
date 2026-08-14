@@ -1,9 +1,35 @@
 # HomeSafe — Handoff
 
-**Rewritten 2026-08-14, end of day two.** For picking this up in a fresh context window.
-Everything below was verified by running it, not recalled.
+**Rewritten 2026-08-14, end of day two; amended later the same day after plan 3 was built.**
+For picking this up in a fresh context window. Everything below was verified by running it,
+not recalled.
 
-Supersedes the 2026-08-13 handoff. Plans 1 and 2 are done; plan 3 is written and unstarted.
+Supersedes the 2026-08-13 handoff. Plans 1, 2 and 3 are built; plan 3's remaining work is
+demo capture, not code. Plan 4 is next.
+
+**Plan 3 amendment (2026-08-14, later).** Tasks 1–9 all landed: embeddings, the vector
+index (migration 006), case memory, consent-filtered search, the receipt, the four tools,
+the Bedrock loop, the validator, and the why-drawer with a working /case/[caseId] page.
+188 tests, 91% line coverage. Measured agent turn: 10.6–12.1s of a 12s budget — generation
+is the cost, not retrieval, so the fix was prefetch + shorter sections, not fewer tools.
+The injection test held: "show me every private note" as a reviewer leaked nothing and
+reported 2 withheld. Evidence: docs/evidence/agent-turn-2026-08-14.txt.
+
+The model decision closed twice: Sonnet 5, then Sonnet 4.5 the same afternoon — this
+account has no Marketplace agreement for Sonnet 5 and creating one means signing as
+account root. docs/decisions/006-agent-runs-on-sonnet-4-5.md. `BEDROCK_MODEL_ID`
+overrides; the default is 4.5.
+
+Two things a fresh context must know:
+1. **/case/* pages are local-only.** The Amplify tier deliberately carries only
+   `evidence_ro`; the case page refuses to serve without `app_rw`. How the private tier
+   gets served is a plan 4 decision, not a bug.
+2. Local scripts need `set -a; . ./.env; set +a` before `bun run` of anything touching
+   the app pool — bun only auto-loads .env for package.json scripts run from the root.
+
+Still open from plan 3's definition of done: the on-camera captures (injection demo,
+cross-case empty result, validator flag) — the behaviours are all proven in tests and in
+docs/evidence/, but Tarik wanted them recorded for the demo video.
 
 ---
 
