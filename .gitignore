@@ -7,3 +7,5 @@ node_modules/
 .remember/
 # heroui-agents-md
 .heroui-docs/
+
+.claude/settings.local.json
