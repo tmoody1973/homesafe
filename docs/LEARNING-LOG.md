@@ -53,6 +53,60 @@ usually narrower than the word.
 
 ---
 
+## August 13, 2026 — A function around a column throws away the index
+
+**What we expected.** Address lookup to be fast. The table has indexes; the plan specified
+them; the tests passed.
+
+**What happened.** One `resolveAddress("302 Sumner St")` call took **1,900 milliseconds.** The
+spec budgets three seconds for the *entire* evidence timeline, so the very first step was eating
+most of the budget before a single housing record had been fetched.
+
+`EXPLAIN` said it plainly:
+
+```
+• filter
+│ filter: upper(full_address) = '302 SUMNER ST'
+└── • scan
+      estimated row count: 31 - 399,452 (100% of the table)
+      spans: FULL SCAN
+```
+
+The table *had* three indexes. None could help, because the query wraps the column in a
+function. `upper(full_address)` is not `full_address` as far as an index is concerned — the
+database would have to compute `upper()` on all 399,452 rows before it could compare anything,
+so it just reads them all. **An index on a column cannot serve a query that transforms that
+column.** Obvious once stated, invisible while writing the query.
+
+Fixed with an expression index — an index on `upper(full_address)` itself rather than on the
+bare column. Also added an index leading with `street_number, street_name` because the existing
+one led with `zip`, and residents mostly don't type a postcode, so the second cascade step
+couldn't use it either.
+
+**Result: 1,900ms → 53ms.** Same query, same data, same code.
+
+**A second thing, worth more than the speed fix.** The migration failed halfway with
+`Connection terminated unexpectedly`, and afterwards the *first* index existed while the second
+did not, and the migration was not recorded as applied. Our runner wraps each migration in a
+transaction on the assumption that a failure rolls everything back. **For index creation in
+CockroachDB it does not** — building an index is an asynchronous background job that had already
+committed. So a partially-applied migration is a real state this project can reach.
+
+It recovered cleanly only because both statements were written `CREATE INDEX IF NOT EXISTS`, so
+re-running skipped the finished one. That was habit, not foresight. Worth making it a rule: in
+CockroachDB, schema-change statements should be individually idempotent, because the transaction
+will not save you.
+
+**Worth generalising:** tests told us the answer was *correct* and said nothing about it being
+*usable*. Correctness and viability are separate properties, and only one of them had a test.
+The 1,900ms would have surfaced in plan 2 as "the UI feels slow" — a symptom three layers away
+from its cause.
+
+**What I now believe.**
+*(Tarik to fill in.)*
+
+---
+
 ## August 13, 2026 — The dataset the demo is about contains none of the demo's data
 
 **What we expected.** That Boston's Building and Property Violations dataset — the

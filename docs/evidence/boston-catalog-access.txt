@@ -143,3 +143,59 @@ Two consequences, both for the interface rather than the pipeline:
 2. About 2.4% of violations carry a sam_id absent from the current SAM file
    — retired or superseded ids. Those cannot be attached to a canonical
    address and must be shown as unmatched rather than dropped silently.
+
+
+================================================================
+MOO-609 — address resolution. 2026-08-13.
+================================================================
+
+--- Before indexing: a full scan of 399,452 rows per lookup ---
+  resolveAddress("302 Sumner St")   1,900ms
+
+  EXPLAIN:
+    • filter
+    │ filter: upper(full_address) = '302 SUMNER ST'
+    └── • scan
+          estimated row count: 31 - 399,452 (100% of the table)
+          spans: FULL SCAN (SOFT LIMIT)
+
+Cause: the query wraps the column in upper(), and an index on a column
+cannot serve a query that transforms that column. The three existing
+indexes (parcel_id, sam_address_id, and zip-leading street index) were all
+unusable for this.
+
+--- After migration 004 ---
+  EXPLAIN:
+    └── • scan
+          estimated row count: 10 (<0.01% of the table)
+          table: address_entity@address_entity_upper_full_address_idx
+          spans: [/'302 SUMNER ST' - /'302 SUMNER ST']
+
+  timings (pool warmed, so this is query time not TLS setup):
+     53ms   1 candidate   302 Sumner St        132380  high
+     47ms   1 candidate   181-183 State St     130392  high
+     89ms  10 candidates  1 City Hall Sq       414498  ambiguous
+     74ms   0 candidates  99999 Nowhere Blvd   (none)
+
+1,900ms -> 53ms. Same query, same data, same application code.
+
+--- The ambiguity case fired on real data, unprompted ---
+`1 City Hall Sq` returns TEN candidates and reports `ambiguous`, not `high`.
+This is the behaviour FR-01 exists for: the resolver presents a list and the
+resident chooses. It matters because SAM is unit-level — a street address in
+a multi-unit building legitimately matches the building and every apartment
+in it, so ambiguity is the common case rather than an edge case. The plan was
+written expecting this branch to be hard to trigger.
+
+--- Partial migration is a reachable state in CockroachDB ---
+Migration 004 first failed with `Connection terminated unexpectedly`. After
+the failure the FIRST index existed, the second did not, and the migration
+was not recorded as applied — despite the runner wrapping each file in a
+transaction.
+
+Index creation in CockroachDB is an async background job that had already
+committed, so the transaction did not roll it back. Recovery worked only
+because both statements were written CREATE INDEX IF NOT EXISTS.
+
+Rule going forward: CockroachDB schema-change statements must be
+individually idempotent. The surrounding transaction will not save you.
