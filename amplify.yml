@@ -19,6 +19,12 @@ applications:
             - curl -fsSL https://bun.sh/install | bash
             - export PATH="$HOME/.bun/bin:$PATH"
             - bun --version
+            # Two installs, because there are two dependency trees. web/ imports
+            # the query code from ../src, and that code imports `pg`, which Node
+            # resolves from the REPO root's node_modules — not web/'s. Installing
+            # only in web/ builds locally (where the root tree already exists) and
+            # fails on a clean checkout with "Module not found: Can't resolve 'pg'".
+            - cd .. && bun install --frozen-lockfile && cd web
             - bun install --frozen-lockfile
         build:
           commands:
