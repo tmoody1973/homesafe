@@ -1,0 +1,11 @@
+$ bun run src/cli/evidence.ts "302 Sumner"
+
+Address candidates:
+  SAM 316181  302 Sumner St 2  parcel=0104910000  [structured_components, ambiguous]
+  SAM 392706  302 Sumner St Bsmt  parcel=0104910000  [structured_components, ambiguous]
+  SAM 316180  302 Sumner St 1  parcel=0104910000  [structured_components, ambiguous]
+  SAM 132380  302 Sumner St  parcel=0104910000  [structured_components, ambiguous]
+  SAM 316182  302 Sumner St 3  parcel=0104910000  [structured_components, ambiguous]
+
+5 addresses match "302 Sumner" equally well — most likely separate units in one building. Choosing for you could attach these records to the wrong home, so pick one and re-run with its SAM id:
+  bun run evidence 316181

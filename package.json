@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "migrate": "bun run db/migrate.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "evidence": "bun run src/cli/evidence.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",

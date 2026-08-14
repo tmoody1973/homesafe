@@ -330,3 +330,33 @@ Something can be essential and not be the headline.
 
 **What I now believe.**
 *(Tarik to fill in.)*
+
+---
+
+## August 14, 2026 — The query that would have hidden every heat record
+
+**What we expected.** Task 13 was the easy one. Three ingests were done, a million records
+were loaded, and the final task was a SELECT and a print loop. The plan had the code written
+out; it looked like typing.
+
+**What happened.** The plan's query joined events to addresses. RentSmart records aren't
+joined to addresses — they're joined to a parcel, the plot of land, because that's how Boston
+files them. Measured before writing it: the plan's query reaches 640,922 records and **zero**
+heat records. Every single one of the 4,959 heat records and 28,183 pest records is
+parcel-filed. The deliverable would have run, printed real Boston data, passed every test in
+the plan, and been silently empty in the one category the entire demo is about — the exact
+hole MOO-617 was pulled into plan 1 to close, quietly reopened by the last task.
+
+**Also worth keeping:** this is the third defect in a row found by measuring instead of
+reading. The permits date parser returned Invalid Date for all 659,669 rows. The violations
+`sam_id` sentinel of `0` claimed a high-confidence match to an address that doesn't exist.
+Neither threw. Neither failed a test — both plans' fixtures used values the live files don't
+contain. The pattern isn't "the plan had bugs"; it's that a fixture written by the same person
+who wrote the code can only ever confirm what they already believed. Only the real bytes
+disagree.
+
+**Also worth keeping:** the 200-record cap printed "200 public record(s)" for a building with
+216. Truthful number, false impression. The fix was seven words.
+
+**What I now believe.**
+*(Tarik to fill in.)*

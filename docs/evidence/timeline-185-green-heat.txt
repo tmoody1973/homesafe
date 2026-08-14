@@ -1,0 +1,1406 @@
+$ bun run src/cli/evidence.ts "441647"
+
+SAM 441647  185 Green St
+
+200 public record(s) for SAM 441647 — the newest 200; older records exist:
+
+  2026-07-24  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c2dafe9a-907a-4fd3-9158-81f0089f7be3
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-07-21  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7e790903-65e1-4853-9d1c-fef327ed8834
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-07-21  [rentsmart]  structural_safety
+    Housing Violations The owner shall provide, install, and maintain in operable condition smoke detectors and carbon monoxide alarms in every residence is required
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e280c27e-2713-4dbf-9000-f82dc4d00ca6
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-07-17  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_784ebf3d-1a03-464f-b562-4722408217cc
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-05-17  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_469a5d60-413f-45c3-b123-841d3b44bc88
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-05-12  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_67f27f58-7501-40af-a607-440b0b9ce5d2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-05-06  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_433e76e0-d5b3-42d9-91ec-d50121b7d646
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-04-14  [rentsmart]  pest
+    Sanitation Requests Rodent Activity
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_caaa0a08-4e83-46b9-8d43-82e8591778ba
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-04-09  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_748cf825-5998-459c-a82a-daccdc6f397c
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-04-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3cec97b7-ca9c-4944-864b-a2aa95282b97
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-28  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_21020df2-148c-43d8-bd94-a471edd1185f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-24  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3c9ab8ed-0ad3-44b2-ad36-3a1bbaf42ed5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-24  [rentsmart]  structural_safety
+    Housing Complaints Unsafe Dangerous Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_22ce52ca-175b-4007-8671-45187bee2f3c
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-23  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9e6bfeec-bc1e-40d8-a410-25a77e95f646
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-22  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f9e3f85e-111b-4c96-b5d5-9bc523f84b57
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_79ba703d-0199-4e25-a143-308267698447
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-15  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e5a7338e-1d40-436f-bb71-4f8e286e6967
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-03-15  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: com
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0ff9c7ba-30fd-4edc-8af7-bd93a8770b75
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-02-27  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_cc264234-0017-4910-b41f-2148fd5ff6cf
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-02-11  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e2a813e3-50c8-4273-830c-79e066db0d27
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-02-07  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_47f75013-a543-4da7-99ae-cb83be35f9b2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_db5cd4bd-a7a2-4fc9-9212-012f77ee7904
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-16  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b2e63cfc-5810-4cc3-bbb0-2a8534029ff8
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-15  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2392f8a5-59fd-4081-b78b-eeb076e7c613
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-14  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4a0e9165-284b-4a2b-ad9d-cd133d764f1e
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-14  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7f76994d-121c-4800-8b71-bc1c6185f8b7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2026-01-14  [rentsmart]  heat_hot_water
+    Housing Violations The owner shall provide heat in every habitable room and every room containing a toilet, shower, or bathtub from September 15th through May 31st inclusive.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4c39b26b-3c25-403a-8aaf-79024a05a39d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-11-04  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_db7327bc-ee3e-406c-8fe3-e42fcffa838f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-11-04  [rentsmart]  pest
+    Housing Complaints Mice Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_ecab7780-d817-4bee-9f42-d711bc1562af
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-11-04  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4c709c64-2aab-42e8-a830-f6f7eaa43417
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-11-04  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_34e0adf5-56df-4963-bd5b-2ce7ed1e81c8
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-10-05  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_46d0c63e-741c-40c7-ab89-fb69c92eb355
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-10-01  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_667be747-5f77-48f4-a171-1a1ed9919f17
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-09-23  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_de7978fd-f8ad-46b4-8a09-256052e12090
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-26  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_ef49e692-a167-4795-80c4-0db421b7ee99
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9bc0af7d-023a-45be-96d7-d514eeae2070
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3e6479b3-ce0c-4b69-a60f-d63ea2476810
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-20  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_967e5db4-e69c-4a5d-b120-a7a5874c95cd
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-20  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_01d9c3c3-7b6f-4c35-8f92-640aca0ddfc1
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-20  [rentsmart]  other
+    Housing Violations The owner shall provide and install tight fitting, 16 mesh per square inch screens for exterior openable windows from April 1st to October 31st.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_05119f83-d12f-4f37-9a24-657e9cabe32b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-07  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_44af83ae-f633-4be9-b967-0814772c1963
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-08-01  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_8c7355b7-7ca6-4259-bf32-ea6dfdc13ef2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-26  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_01507300-45f3-408e-8096-67923e243c50
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-17  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_94cb35c7-add3-4d5f-ab15-0e5916b8c1db
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-17  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e8d61419-9d23-4a70-8d0e-9e0888266d0f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-17  [rentsmart]  structural_safety
+    Housing Violations Every occupant of a residence shall exercise reasonable care in the use of all building and structural elements of the residence.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_94cd366a-64bf-4aea-8e69-408826450718
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-16  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: res
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6846ee6d-351d-4383-8b44-dd05bd9d1f68
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-16  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_071d34a3-6905-48b4-895a-e827aeeb9a3a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-10  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d3be5506-f668-49e6-b4c7-9c5a3d2568c5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-10  [rentsmart]  structural_safety
+    Housing Violations The owner shall provide, install, and maintain in operable condition smoke detectors and carbon monoxide alarms in every residence is required
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_411ea540-2645-47e7-b47a-73831d1cee52
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-10  [rentsmart]  structural_safety
+    Housing Violations The owner of every residence of 10 or more units shall provide and maintain auxiliary emergency lighting systems and exit signs required by M.G.L. c. 143, § 21D.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c275b034-98cf-492e-99df-d14daa3bb71d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-10  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a5912f67-1f5e-4dd7-89d1-f8b4ee8de6fe
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-06-06  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d58a0d19-e80c-437f-8e38-b7cd3b0e92d9
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-30  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0eaf6567-a37d-4dab-a7ee-ad8f3797d1a5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-29  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_816ef1af-8af3-40b4-ba41-d323f28d3925
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-26  [rentsmart]  utilities
+    Housing Complaints Electrical
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c9113ab4-e1e5-40e2-bcb7-ee5f9ffa1701
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-23  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d9be23ed-b46e-40ac-a2b3-311b7a3fcf47
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-18  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_af0c7901-55d9-4f27-bfdc-87f4a9d05d4b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-13  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2ba0c4c6-ff18-47c0-9d5d-dfbb1f0e8768
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-12  [rentsmart]  heat_hot_water
+    Housing Violations The owner shall provide and maintain in good operating condition facilities capable of heating and delivering hot water.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e0f62699-2424-4e87-b0f8-99b8554c32f2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-09  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b2835b17-f590-4ce6-8c1e-8969793ff115
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-05-09  [rentsmart]  utilities
+    Housing Complaints Unsatisfactory Utilities - Electrical, Plumbing
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6c55dfaa-6258-434a-8140-434a81542d2f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-04-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_259c6738-a0d6-4270-813e-2a668573ab16
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-04-02  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3223b735-4d7f-4c66-b6ff-1ca9986380c3
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-04-02  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_04c6c7a3-87c9-4148-97d7-957d12858cd7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-03-18  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: res
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9d2c3bd4-e03b-44aa-8083-1ef7c4e21c6d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-03-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3d21ca86-d463-412b-8a2f-2268200d69b5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-03-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6b2f4082-10e3-4e8d-96f4-cec12203f4b3
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-03-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d3d06c75-5892-4da0-9a76-f91a21e869f6
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-02-24  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_91ad554d-614a-4527-9eac-f9d7bd543e98
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-02-20  [rentsmart]  heat_hot_water
+    Housing Violations The owner shall provide heat in every habitable room and every room containing a toilet, shower, or bathtub from September 15th through May 31st inclusive.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d5dc27c4-b90b-4bcc-8213-a7829ffb3c49
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-02-19  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9c201e52-5898-42ba-a030-7b78f0f14706
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-02-19  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_275b1592-b498-4b2a-ba07-1e8b92c3f2a2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-02-19  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_841a1a31-a9c9-47a6-b881-25164e5c0fe7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2025-01-24  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_10e6fca1-fc9d-4dca-ae21-8a5308e116ff
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-20  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2a59483c-f328-44d1-9a5f-652163b2e32a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-19  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9bc36458-43ca-4a70-8a1c-7a5f47878038
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-14  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c409ae06-93e7-4518-aa34-9f4fa020cd1e
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-13  [rentsmart]  other
+    Housing Violations Every owner of a residence who does not reside therein shall post signage, which contains the owner's name, street address and telephone number, and, if applicable.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_416109d4-cf01-4257-b74d-29b33b150003
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-13  [rentsmart]  other
+    Housing Violations In the event of leaks and flooding, the owner shall ensure all surfaces have been dried within 48 hours from the time they are notified or the end of the event, whichever is sooner.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_5607e6e4-b8a8-4295-a878-41248654560b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-09  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_eacdf679-a89b-4daf-9f67-69bb39e5dc30
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-12-07  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e135308b-3aac-45fa-9fc8-07f5fe250fc2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-11-04  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d65a522d-a188-4305-89eb-2eca2640d84f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-11-04  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0f148fe4-c0f8-47e6-b4ee-6a2f85a2e6ba
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-10-30  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f1daa580-29bc-40d2-8735-7fc86ab76c34
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-10-29  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a7da68ac-42db-4d11-be32-28f9c1517cfb
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-10-29  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b8cd3f2d-dd7b-4729-ab90-bbb8ca2e7b5f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-10-28  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1015810b-32cc-4050-aa9c-0b9af0d21daf
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-30  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b179249b-54f3-4589-b1e9-8f2fdfceb78c
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-22  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a07a23b9-834a-4fdb-9e72-0160641d3847
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-22  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_dddbfb1d-d51d-429e-a933-1fa33db039c9
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-22  [rentsmart]  other
+    Housing Violations Common Areas: The owner shall be responsible for maintaining in a clean, sanitary, and safe condition that part of the residence which is used in common by all the occupants.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e957bf80-178b-4ecd-9483-a2fc6e361296
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-22  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e2c2c087-3559-4063-a0e1-0d23b158d5b2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-13  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: res
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4b4794ce-0ae6-41bd-b732-448d65b20552
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-11  [rentsmart]  pest
+    Sanitation Requests Rodent Activity
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_71a77636-13c7-47c2-bb3b-28542cf74fa7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-07-09  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_da591145-a0c3-447f-8dee-417755c28967
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-26  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c8ed6bf8-b4c0-4941-a8e4-c9e3a4f2b0c5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-26  [rentsmart]  pest
+    Housing Violations The owner of a residence containing two or more dwelling units, including a homeless shelter or a rooming house, shall maintain it and its premises free from infestation and shall be responsible for pest elimination.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_17654584-9f45-4322-9a6d-0e90221080d4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-26  [rentsmart]  utilities
+    Housing Violations Every required kitchen sink, bathroom sink, and shower or bathtub shall be connected to the hot and cold water lines and to a sanitary drainage system.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4fc67696-4051-442a-9ab2-05c5af38b035
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-26  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_41aacf94-e742-47f9-9297-b6dc1d6f0be3
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-26  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e9740b41-c4c3-4796-a2b0-20711a226830
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-25  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6f55160c-d694-4ad3-b8cb-9f483f9e1c7b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-23  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a452efde-ec71-4c5d-8c8e-1bb20385068f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-22  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_98d14182-1f4d-4d37-9ff5-04e87477c03b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-10  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0cb5e629-f4b9-48ea-bb45-021d7cb54fba
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-06-02  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_695280a4-2cbe-461d-9199-e50d1878767a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-30  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6eb6a106-2be7-4c44-961f-5679c56eec47
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-12  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e28b0bc6-2629-4532-ab8e-addaa09acbb6
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1686e94b-74a1-4649-8b3a-983ad6b81602
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-02  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_31fc21b9-4183-49a9-8d1c-e19cd99659d4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-01  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1d8cb138-836c-41a7-8c91-6f732635badb
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-05-01  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e625b0ca-eff9-461a-a4f0-7f6b32f46edc
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-04-26  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_58514408-e5d3-4b0a-80e0-d872a6c4ed68
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-04-25  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_029b1da9-c672-4bd3-b504-31a046ea0204
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-04-22  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_812680e9-687a-4c20-92dc-2059b8b248a9
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-04-08  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_46035e3b-6e46-4658-b843-2ea356f448d0
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-03-25  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: res
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_cbc1e5b7-2ad1-4311-b97c-779eb76aed59
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-03-14  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_3086a456-b77a-49e8-8001-6f95bf7e9af8
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-02-22  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1abf5198-2ee6-4d06-a954-e02d09d26a83
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-02-17  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_62058d65-ed63-4aea-b358-199b41d78a37
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-02-16  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7e758b0c-a01d-480f-93b8-f5f8f56b2c80
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-02-06  [rentsmart]  pest
+    Sanitation Requests Rodent Activity
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_21d3b281-524c-40a5-be52-961ad5302e91
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-02-04  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_fd6cea00-cfcd-4c37-bfc6-128e1ef1d7a5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-01-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c435e1c7-1386-4448-96b8-969a289b38bc
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-01-02  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_75cd57ea-08a2-4329-82db-5163645c0656
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-12-14  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_eb9bc90a-cc8e-4f73-9e3e-5b46939bfb30
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-12-12  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_8f416f07-8046-4464-a051-ce96b881b877
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-12-11  [rentsmart]  pest
+    Sanitation Requests Rat Bite
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7985c24c-efd9-4c8c-834e-2ec72c3ca037
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-12-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_331c5187-be56-4247-80f4-01ea91999454
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-30  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_651b08eb-0d32-4400-a775-ed1fadc4c09b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-30  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d50f837e-5284-4da4-be73-26af82f9249d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-30  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_703f67e1-3430-466f-8f82-e5e17522e3ce
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-13  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b428e58e-f45f-467d-a1cf-233d9facb88a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-13  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_27b665b7-16a0-484d-937d-7e1573903629
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-10  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7cf48ace-8c41-420e-b0c8-f42f55128ffc
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-09  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0fd87692-6abe-4ddf-9f64-0df51d13f00d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1c6d3233-fa1d-440d-b479-43325c1a2df6
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-11-02  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_7f9556bf-c9d4-4156-a5af-0461c923cdca
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-26  [rentsmart]  pest
+    Housing Complaints Bed Bugs
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_1990ef7f-53a9-4eaa-8bce-d58b83113ec0
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-23  [rentsmart]  other
+    Housing Violations All interior use of pesticides shall be in accordance with applicable laws and regulations:
+Provide 48 hours pre-notification in writing to occupants and owners and occupants shall provide access and adhere to all instructions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e133eb1d-0d96-4f93-a38d-8dd95dd99605
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-23  [rentsmart]  pest
+    Housing Violations The owner of a residence containing two or more dwelling units, including a homeless shelter or a rooming house, shall maintain it and its premises free from infestation and shall be responsible for pest elimination.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_fe769157-b095-4ab4-a7df-441937b0930d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-11  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a69cddb3-0875-4c65-b6fc-6bc05a7c7322
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-10  [rentsmart]  structural_safety
+    Housing Violations Every occupant of a residence shall exercise reasonable care in the use of all building and structural elements of the residence.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_909ca111-28e2-400f-9c62-4401eebb2f9a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-09  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4bfd47b1-01c0-4a7c-874e-9f551790c0fb
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-09  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_46e93704-998d-4000-b6c1-aaf6aaf5ac84
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-06  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6d5576ef-106e-45b1-8432-f09bf2013be4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-04  [rentsmart]  pest
+    Housing Complaints Mice Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0f4a8ed5-3ae3-4511-9316-b36ba502b2cd
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-10-04  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_281677eb-91f1-4395-9447-d4d46b20efa4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-13  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c0fce46b-0c27-4f18-8553-6f02c6a2477f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-13  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f864ab10-1a11-4c51-9df2-06a54096ea81
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-13  [rentsmart]  pest
+    Housing Violations Residences containing one dwelling unit: (1) The occupant shall maintain the unit free from all pest infestation and shall be responsible for pest elimination.  (2) The owner has not maintained structural or other building elements necessary to keep pests from entering.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_30436caf-81bc-4f00-929e-6b83dee08752
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-13  [rentsmart]  other
+    Housing Violations The owner shall ensure proper installation, and shall maintain in operable condition, all facilities and equipment which the owner is required to provide, and all owner installed equipment.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2f112aa8-d1a6-4419-9e72-66216087381f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-11  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d29e2499-bd81-47cf-b5f2-618c7baa67a4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-09-07  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_0fcdd3a8-9b22-46ea-ae77-44ab9d1c537a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-07-28  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a86b88a7-3b11-4052-bdac-c4670a570ce6
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-07-28  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6077fc12-8a31-4c44-bfff-afdd6f040582
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-24  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a2bbf7c7-7ad6-49b4-a7ac-5f1183170048
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-18  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d1b6a8f4-3bef-4e51-ab24-9b5a2b2377ac
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-18  [rentsmart]  structural_safety
+    Housing Violations Every owner of a residence shall maintain all buildings and structural elements in compliance with accepted standards so they are in good repair and in every way fit for the intended use.
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_5b8aacc0-8d58-48c3-8d1f-d82c606f09d3
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-11  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_8bbd045c-068b-439d-bcca-eeacde6554c7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-11  [rentsmart]  other
+    Housing Violations The owner shall provide, install and maintain locks in accordance to 780 CMR: Massachusetts State Building Code and 521 CMR: Architectural Access Board Regulations and M.G.L. c. 143 & 3R
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_970f707c-c089-4514-8a15-93222fe523fa
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-05  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a817b749-1f5c-4efc-8684-eac2dc3c59d5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-05-02  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_a2c92074-f078-4d63-8007-4051b3753cda
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-04-27  [rentsmart]  other
+    Housing Complaints Building Inspection Request
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_bd3507d1-1487-4bfb-9be3-21f938acce6a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-04-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_63f48b77-92e1-42a6-a80e-317bb16f3b2b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-04-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_099e5efd-9cb2-43c6-b6ab-d23fc9ff1583
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-04-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_bce592ef-32d5-46ed-8607-97c754b3c54f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-04-03  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_8d57d1fe-bb19-4f89-993b-f8520d4c534d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-02-17  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_fdce9ded-fc4e-40ec-ac4a-5d2b59520ec7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-02-15  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d972b89d-20f0-4876-881a-b10a032f867a
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-02-10  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e84d8fa3-c766-43d3-b0c7-85f8ede9d870
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-02-04  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e37f349b-84ef-4bc1-9779-4c5cf573275d
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-01-25  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4c67e52a-aa0c-4c0e-adbf-066fe1edab01
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-01-14  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_683e80c7-ce03-4a9e-9ad8-7064ebb07002
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2023-01-12  [rentsmart]  other
+    Housing Complaints Contractors Complaint
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f00786ee-55f6-4103-a1ff-44756d101d34
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-26  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_869df129-f942-4e80-9b67-d1c09fbeb950
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f7628fc4-71f9-40f6-a323-e08235682be5
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-20  [rentsmart]  utilities
+    Housing Complaints Unsatisfactory Utilities - Electrical, Plumbing
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_dbb9c705-75d8-4766-aa65-205768e20d38
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2dd19e35-0e7a-4d61-8624-be161b05c44e
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-18  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b809f467-c22f-4c8e-8c6e-517981720d0f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-10  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2d55f69a-7aa9-46a5-b60d-81ab4d8fa352
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-07  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_151d11ec-e46a-439f-a179-3ffd298f08d4
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-07  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_c74b3831-7cc9-4f26-b0c4-49101c31c712
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-05  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d3ad6d68-9460-4d9d-bc30-eba019ca6be9
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-12-05  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_5555c8ae-32e0-483c-94e7-d6cd26f03f5b
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-30  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_4ecd07d7-9bc4-4d3e-8ec3-dfab6c3a6d74
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-28  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d87c5b87-6287-46a5-8025-17c3f4080685
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_94c51c8f-a883-4917-9f34-f90ea9d244d0
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-18  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_e63adab6-fdc0-437d-bcd1-400c24dc6cac
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-16  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_8af12304-87b3-4b27-8217-1cb4cc25a922
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-11-15  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f5f8c269-c5b5-4365-9f2f-3ff405a031c0
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-08-18  [rentsmart]  pest
+    Housing Complaints Pest Infestation - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_353cf124-32cc-4621-a0e8-ae0da3b2ee79
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-07-11  [rentsmart]  other
+    Housing Complaints Unsatisfactory Living Conditions
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_fe9766f6-1506-4ed1-b78e-dd2480b47d54
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-06-25  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_2799984a-3863-4f02-a1b5-fcc0358e4305
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-04-20  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_f59e82cc-2258-4440-8783-b47a7a0fd879
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-03-28  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_b5826fc9-6e63-4cc3-8b10-be88d122b0ff
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-03-21  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_d06c3957-9a42-4ce1-8aa9-894c348b13f2
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-03-17  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_11a273ea-3bfd-453d-8e2f-3759238ceec7
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-03-16  [rentsmart]  other
+    Housing Complaints Maintenance Complaint - Residential
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_babce717-dd53-4ea6-ab5a-10cfe033dd3f
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2022-03-06  [rentsmart]  heat_hot_water
+    Housing Complaints Heat - Excessive, Insufficient
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_6942d187-e35c-4b72-b1db-913d02fa3cda
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.

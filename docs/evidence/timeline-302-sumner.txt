@@ -1,0 +1,55 @@
+$ bun run src/cli/evidence.ts "302 Sumner St"
+
+Address candidates:
+  SAM 132380  302 Sumner St  parcel=0104910000  [sam_exact_address_zip, high]
+
+7 public record(s) for SAM 132380:
+
+  2024-08-12  [rentsmart]  sanitation
+    Enforcement Violations Improper storage trash: res
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9238fa7c-6d70-4090-a469-1cbcd4ec6f54
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2024-08-12  [rentsmart]  sanitation
+    Enforcement Violations Overfilling of barrel/dumpster
+    scope=parcel confidence=medium via=parcel_direct
+    ref=evt_9e684fac-67fa-4551-91f9-ddb0004d56ba
+    source: https://data.boston.gov/dataset/rentsmart
+    caveat: RentSmart is an aggregated housing-signal dataset. It is not a separate verified inspection outcome and must not be read as a property score.
+
+  2015-03-26  [building_permit]  permit
+    Short Form Bldg Permit Renovations - Exterior
+    scope=address confidence=high via=sam_id_direct
+    ref=evt_07f07c8c-df10-46b1-a1cb-795f5a9cd283
+    source: https://data.boston.gov/dataset/approved-building-permits
+    caveat: This public permit records authorized or issued work. It does not establish that a specific resident concern has been repaired or resolved.
+
+  2014-11-18  [building_violation]  other
+    104.6 Right of Entry
+    scope=address confidence=high via=sam_id_direct
+    ref=evt_2ba307e9-f76e-427e-a6fc-2d17e5357371
+    source: https://data.boston.gov/dataset/building-and-property-violations1
+    caveat: This is a historical public enforcement record. It does not establish a current condition at the property.
+
+  2013-10-22  [building_violation]  structural_safety
+    116.2 Unsafe and Dangerous
+    scope=address confidence=high via=sam_id_direct
+    ref=evt_e78e1537-a5ac-49dd-9f4c-9c0127300c13
+    source: https://data.boston.gov/dataset/building-and-property-violations1
+    caveat: This is a historical public enforcement record. It does not establish a current condition at the property.
+
+  2011-04-14  [building_violation]  other
+    104.6 Right of Entry
+    scope=address confidence=high via=sam_id_direct
+    ref=evt_3ecbb9ab-0be4-4f24-96ae-f54dc33c7def
+    source: https://data.boston.gov/dataset/building-and-property-violations1
+    caveat: This is a historical public enforcement record. It does not establish a current condition at the property.
+
+  undated  [building_violation]  structural_safety
+    121.2 Unsafe and Dangerous
+    scope=address confidence=high via=sam_id_direct
+    ref=evt_fd5b97a0-6f30-4496-978d-c5a62af87838
+    source: https://data.boston.gov/dataset/building-and-property-violations1
+    caveat: This is a historical public enforcement record. It does not establish a current condition at the property.
