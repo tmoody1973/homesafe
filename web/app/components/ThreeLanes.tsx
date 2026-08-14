@@ -62,32 +62,32 @@ export function ThreeLanes({ items, notes, analysis }: Props) {
       <Tabs.ListContainer>
         <Tabs.List aria-label="Timeline lanes">
           <Tabs.Tab id="public">
-            Public record
+            Building history
             <Tabs.Indicator />
           </Tabs.Tab>
           <Tabs.Tab id="notes">
-            Your notes
+            My journal
             <Tabs.Indicator />
           </Tabs.Tab>
           <Tabs.Tab id="analysis">
-            HomeSafe analysis
+            Get answers
             <Tabs.Indicator />
           </Tabs.Tab>
         </Tabs.List>
       </Tabs.ListContainer>
 
       <Tabs.Panel className="pt-6" id="public">
-        <h2 className="sr-only">Public record</h2>
+        <h2 className="sr-only">Building history</h2>
         <PublicLane items={items} />
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="notes">
-        <h2 className="sr-only">Your notes</h2>
+        <h2 className="sr-only">My journal</h2>
         {notes ?? (
           <ComingLater what="Your own notes about this home will appear here, kept private to you." />
         )}
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="analysis">
-        <h2 className="sr-only">HomeSafe analysis</h2>
+        <h2 className="sr-only">Get answers</h2>
         {analysis ?? (
           <ComingLater what="HomeSafe's read of these records will appear here, with a citation for every claim it makes." />
         )}

@@ -27,7 +27,7 @@ database credentials that cannot read this table."*
 Ask: *"The heat is still out. What changed?"* While it thinks: *"The agent reads her
 private notes and the city's records from one CockroachDB cluster — vector search for
 meaning, consent filters inside the SQL, before ranking."* Answer appears with numbered
-citations. Open **"Why do I remember this?"** and scroll slowly: *"This panel is not the
+citations. Open **"Why do I remember this?"** (in the *Get answers* tab) and scroll slowly: *"This panel is not the
 AI describing its memory. It's a receipt written by the database layer — the exact SQL
 filter that ran, every item read, and what each one does not prove. Any sentence citing a
 source that wasn't read gets deleted before she sees it."*
@@ -79,6 +79,10 @@ Everything below already exists on production. Do NOT re-create it; just sign in
   - A drafted task waiting for approval ("…call 311…")
   - 200+ real public records on the timeline; the receipt honestly says the agent
     read the 40 most recent
+- Tabs now speak Denise's language: **Building history / My journal / Get answers**,
+  with a "How this helps you hold your landlord accountable" card up top and a
+  **printable case file** linked in the case header — end the video by printing it:
+  "this is what she hands to 311, a counselor, or a court clerk."
 - **Your one live ask on camera:** *"The heat is still out. What changed?"*
   — the receipt will show the recall of the agent's own 3-day-old conclusion,
   labeled "past reasoning, not a source of new facts," and the delta compared

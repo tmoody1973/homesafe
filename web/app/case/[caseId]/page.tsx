@@ -6,6 +6,7 @@ import { timelineFor } from "../../../lib/evidence";
 import { AddressMap } from "../../components/AddressMap";
 import { AnalysisLane } from "../../components/AnalysisLane";
 import { AskForm, NoteForm } from "../../components/CaseForms";
+import { HowThisHelps } from "../../components/HowThisHelps";
 import { NotesLane } from "../../components/NotesLane";
 import { TaskList } from "../../components/TaskList";
 import { ThreeLanes } from "../../components/ThreeLanes";
@@ -44,9 +45,12 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
         <h1 className="text-3xl font-semibold">{header.rawAddress}</h1>
         <p className="text-muted">
           {header.issueCategory} · {notes.length} note{notes.length === 1 ? "" : "s"} ·{" "}
-          {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"}
+          {publicRecords.length} public record{publicRecords.length === 1 ? "" : "s"} ·{" "}
+          <Link href={`/case/${caseId}/file`}>your printable case file</Link>
         </p>
       </header>
+
+      <HowThisHelps noteCount={notes.length} />
 
       {header.lat !== null && header.lon !== null && (
         <AddressMap lat={header.lat} lon={header.lon} label={header.rawAddress} />
