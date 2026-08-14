@@ -24,6 +24,8 @@ export type MemorySearch = {
 };
 
 export type MemoryHit = {
+  // Spec §4 addresses a resident's own words as `obs_…`. A memory with no
+  // observation behind it — an agent summary, say — keeps its own `mem_…`.
   readonly ref: string;
   readonly body: string;
   readonly memoryType: string;
@@ -59,8 +61,8 @@ const VISIBLE_WHERE = [
 ].join("\n    AND ");
 
 export const SEARCH_SQL = `
-  SELECT memory_id, body, memory_type, consent_scope, created_at,
-         embedding <-> $1::VECTOR AS distance
+  SELECT memory_id, source_observation_id, body, memory_type, consent_scope,
+         created_at, embedding <-> $1::VECTOR AS distance
   FROM memory_item
   WHERE ${VISIBLE_WHERE}
   ORDER BY embedding <-> $1::VECTOR
@@ -82,6 +84,7 @@ const EXCLUDED_SQL = `
 
 type HitRow = {
   memory_id: string;
+  source_observation_id: string | null;
   body: string;
   memory_type: string;
   consent_scope: string;
@@ -95,7 +98,9 @@ function toVectorLiteral(vector: number[]): string {
 
 function toHit(row: HitRow): MemoryHit {
   return {
-    ref: `mem_${row.memory_id}`,
+    ref: row.source_observation_id
+      ? `obs_${row.source_observation_id}`
+      : `mem_${row.memory_id}`,
     body: row.body,
     memoryType: row.memory_type,
     consentScope: row.consent_scope,
