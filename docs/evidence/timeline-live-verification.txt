@@ -1,0 +1,36 @@
+=== HomeSafe live timeline — verification 2026-08-14T15:59:24Z ===
+URL: https://main.d3jkv6lewhcr03.amplifyapp.com
+
+--- load times, warm (spec budget: 3s) ---
+  302 Sumner St, 7 records     0.649199s
+  185 Green St, 200 records    1.267928s
+  search                       0.227546s
+  A cold start measured 3.27s once; every warm request since is under 1.7s.
+  Lambda-backed rendering, so the first hit after idle is the slow one.
+
+--- owner / landlord identity reachable? ---
+  raw_payload keys 'owner','applicant','contact_addr1' across 1,062,729 rows: 0
+  raw_payload is never selected by the timeline query and never rendered.
+  The 90 'owner' matches on 185 Green St are Boston housing-code text
+  ("The owner shall provide heat in every habitable room") — the substance of
+  the violation, not a person's identity.
+
+--- ambiguous address: does it refuse to choose? ---
+  addresses match equally well;will not pick for you;
+
+--- empty timeline: does absence read as an all-clear? ---
+  No public records found for this address;This is not an all-clear;
+
+--- accessibility (read from the live accessibility tree) ---
+  heading order       H1 address, H2 lane, H3 per record — no level skipped
+  spurious headings   0  (was 7 identical "Why is this record here?" h3s)
+  search input        accessible name "Boston street address", type=search
+  tab list            accessible name "Timeline lanes"
+  drawer trigger      keyboard focusable; activating sets aria-expanded=true
+  lang attribute      en
+  images missing alt  0
+
+--- credentials ---
+  DATABASE_URL_EVIDENCE  present at runtime, connected as evidence_ro
+  DATABASE_URL_APP       ABSENT — the public tier never holds the write login
+  connection strings found in delivered HTML: 0

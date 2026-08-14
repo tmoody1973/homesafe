@@ -393,3 +393,46 @@ loop had no guard for "did the thing I am polling actually start."
 
 **What I now believe.**
 *(Tarik to fill in.)*
+
+---
+
+## August 14, 2026 — The read-only tier was about to carry the write key
+
+**What we expected.** Deploying the timeline was config work. The query was already
+tested, the data was already loaded, the empty app was already live.
+
+**What happened.** The deployed pages returned 500 on every route that touched the database.
+Amplify's console environment variables turned out to be build-time only — a runtime probe
+reported every one of them ABSENT, including `AMPLIFY_MONOREPO_APP_ROOT`, which is certainly
+set. That is a footgun worth knowing, but it is not the interesting part.
+
+Fixing it meant writing the connection string into the build. And at that point `evidencePool()`
+called `loadEnv()`, which demanded `DATABASE_URL_APP`, `DATABASE_URL_EVIDENCE` and `AWS_REGION`
+**together**. So making the read-only web tier start would have required shipping `app_rw` — the
+login that can write residents' private notes, consent records and case data — onto a public
+internet-facing runtime that has no use for it.
+
+It would never have called it. That does not matter. An unused credential is still a credential
+that leaked, and it would have leaked into the one tier a stranger can reach. The whole project
+is an argument that the wrong data should be *unreachable* rather than merely *un-asked-for*,
+and our own configuration was about to violate it for the sake of one convenient helper
+function that loaded three variables at once.
+
+**Also worth keeping:** it was only found because the deploy broke. A working deploy would have
+had `DATABASE_URL_APP` sitting in the build output, correct and quiet, and nothing would ever
+have pointed at it. The bug was the thing that surfaced the vulnerability.
+
+**Also worth keeping:** four UI defects in a row came from trusting memory over the docs sitting
+in the repo — a `Card as="li"` prop that does not exist, a raw `<button>` trigger that clicks but
+never opens, a `turbopack.root` set to the wrong directory that silenced a warning and broke
+every import, and two theme systems fighting until card titles were white on white. The project
+CLAUDE.md says in capitals that what I remember about HeroUI v3 is wrong. It was right four
+times.
+
+**Also worth keeping:** reading the accessibility tree found what looking at the screen could
+not. Seven identical "Why is this record here?" entries were rendering as `h3` headings, level
+with the record titles, so navigating that page by heading was nearly useless. It looked
+perfect.
+
+**What I now believe.**
+*(Tarik to fill in.)*
