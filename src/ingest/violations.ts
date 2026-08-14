@@ -7,7 +7,7 @@ import { RESOLVER_VERSION } from "../address/resolve";
 import { caveatFor } from "../evidence/caveats";
 import { categorize } from "../evidence/categorize";
 import { ingestEvents, openBostonCsv, type SourceEvent } from "./events";
-import { linkEventsToAddresses } from "./link";
+import { linkEventsToMatches } from "./link";
 import { ingestPool } from "./pool";
 import { parseSourceTimestamp } from "./timestamp";
 import { stripPersonalFields } from "./upsert";
@@ -97,8 +97,8 @@ if (import.meta.main) {
   try {
     const csv = await openBostonCsv(BOSTON_PACKAGES.violations);
     const count = await ingestEvents(pool, csv, new Date(), toViolationEvent);
-    const linked = await linkEventsToAddresses(pool, SOURCE_SYSTEM);
-    console.log(`upserted ${count} violation events, linked ${linked}`);
+    const cited = await linkEventsToMatches(pool, SOURCE_SYSTEM);
+    console.log(`upserted ${count} violation events, ${cited} citing a match`);
   } finally {
     await pool.end();
   }

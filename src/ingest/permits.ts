@@ -7,7 +7,7 @@ import { BOSTON_PACKAGES } from "../catalog/ckan";
 import { RESOLVER_VERSION } from "../address/resolve";
 import { caveatFor } from "../evidence/caveats";
 import { ingestEvents, openBostonCsv, type SourceEvent } from "./events";
-import { linkEventsToAddresses } from "./link";
+import { linkEventsToMatches } from "./link";
 import { ingestPool } from "./pool";
 import { parseSourceTimestamp } from "./timestamp";
 import { stripPersonalFields } from "./upsert";
@@ -100,8 +100,8 @@ if (import.meta.main) {
   try {
     const csv = await openBostonCsv(BOSTON_PACKAGES.permits);
     const count = await ingestEvents(pool, csv, new Date(), toPermitEvent);
-    const linked = await linkEventsToAddresses(pool, SOURCE_SYSTEM);
-    console.log(`upserted ${count} permit events, linked ${linked}`);
+    const cited = await linkEventsToMatches(pool, SOURCE_SYSTEM);
+    console.log(`upserted ${count} permit events, ${cited} citing a match`);
   } finally {
     await pool.end();
   }
