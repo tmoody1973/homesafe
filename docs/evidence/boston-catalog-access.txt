@@ -90,3 +90,56 @@ Ran the live first row of each source through it:
 RentSmart's `owner` field was the one the spec HAD flagged; violations' and
 permits' were the ones it missed. All three are now handled by the same
 function, so the owner's home address never reaches the database at all.
+
+
+================================================================
+MOO-608 — SAM ingest. 2026-08-13.
+================================================================
+
+--- The two records verified before any code existed ---
+Both came from querying Boston's own SAM service directly and were written
+into docs/address_302_sumner_to_parcel.json before the schema was designed.
+They now come back from our database identically:
+
+  SAM 132380 -> 302 Sumner St      parcel 0104910000  building 130883
+  SAM 130392 -> 181-183 State St   parcel 0303807000  building 136572
+
+The second confirms a hyphenated street-number range survives ingest intact.
+
+--- Row count is 399,452, and that is correct ---
+Expected roughly 190k and got twice that, so it needed explaining rather
+than accepting:
+
+  total rows                399,452
+  distinct sam_address_id   399,452   <- no duplicates; the unique key holds
+  rows with a unit value    267,501   <- SAM is UNIT-level
+  distinct parcels          126,789
+
+SAM assigns an id to individual apartments, not just street addresses:
+  20 Washington St 407  unit 407  sam 329287
+  360 Meridian St 9     unit 9    sam  94519
+
+So 399k is street addresses plus units. No rows have a blank full_address
+and none has a null sam_address_id.
+
+--- FINDING: violations are building-level, not apartment-level ---
+Took the distinct sam_id values from the live violations file and looked at
+what they actually point at in SAM:
+
+  violation sam_ids sampled     4,000
+  resolved to a SAM address     3,903  (97.6%)
+  ...of which ADDRESS-level     3,882  (99.5%)
+  ...of which UNIT-level           21  (0.5%)
+  unresolvable                     97  (2.4%)
+
+Two consequences, both for the interface rather than the pipeline:
+
+1. `address_scope = 'address'` for violations is now empirically justified
+   rather than assumed. A resident asking "is there a record about MY
+   apartment?" must be told "there is a record about your building" — those
+   are different statements, and 99.5% of the time only the second is true.
+   The scope badge is the whole difference.
+
+2. About 2.4% of violations carry a sam_id absent from the current SAM file
+   — retired or superseded ids. Those cannot be attached to a canonical
+   address and must be shown as unmatched rather than dropped silently.
