@@ -118,6 +118,36 @@ export function validate(
   };
 }
 
+export type SectionValidation = {
+  readonly ok: boolean;
+  readonly flagged: boolean;
+  readonly sections: Record<string, ValidationResult>;
+  readonly strippedCount: number;
+};
+
+// Validated one section at a time, because the resident reads them one at a
+// time. Validating the four as one blob was the first cut, and it produced a
+// wall of text with no headings — the five-section shape exists so a tired
+// person can find the part they need without reading the rest.
+//
+// The caveat a section owes is appended to that section, not to the end of the
+// answer, so "a permit is not proof of repair" sits next to the permit.
+export function validateSections(
+  sections: Record<string, string>,
+  items: ReceiptItem[],
+): SectionValidation {
+  const validated = Object.fromEntries(
+    Object.entries(sections).map(([name, prose]) => [name, validate(prose, items)]),
+  );
+  const results = Object.values(validated);
+  return {
+    ok: results.some((result) => result.ok),
+    flagged: results.some((result) => result.flagged),
+    sections: validated,
+    strippedCount: results.reduce((total, result) => total + result.stripped.length, 0),
+  };
+}
+
 // What the resident actually reads: surviving sentences, plus any caveat the
 // model owed and omitted.
 export function renderValidated(result: ValidationResult): string {

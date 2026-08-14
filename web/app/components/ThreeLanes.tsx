@@ -1,4 +1,5 @@
 import { Alert, Tabs } from "@heroui/react";
+import type { ReactNode } from "react";
 import type { EvidenceItem } from "../../lib/evidence";
 import { EvidenceCard } from "./EvidenceCard";
 
@@ -46,7 +47,16 @@ function PublicLane({ items }: { readonly items: readonly EvidenceItem[] }) {
   );
 }
 
-export function ThreeLanes({ items }: { readonly items: readonly EvidenceItem[] }) {
+type Props = {
+  readonly items: readonly EvidenceItem[];
+  // Slots rather than data. The address page has no case behind it and passes
+  // nothing; the case page fills both. Keeping this component a layout means
+  // the public timeline never imports anything that reads private tables.
+  readonly notes?: ReactNode;
+  readonly analysis?: ReactNode;
+};
+
+export function ThreeLanes({ items, notes, analysis }: Props) {
   return (
     <Tabs className="w-full">
       <Tabs.ListContainer>
@@ -72,11 +82,15 @@ export function ThreeLanes({ items }: { readonly items: readonly EvidenceItem[] 
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="notes">
         <h2 className="sr-only">Your notes</h2>
-        <ComingLater what="Your own notes about this home will appear here, kept private to you." />
+        {notes ?? (
+          <ComingLater what="Your own notes about this home will appear here, kept private to you." />
+        )}
       </Tabs.Panel>
       <Tabs.Panel className="pt-6" id="analysis">
         <h2 className="sr-only">HomeSafe analysis</h2>
-        <ComingLater what="HomeSafe's read of these records will appear here, with a citation for every claim it makes." />
+        {analysis ?? (
+          <ComingLater what="HomeSafe's read of these records will appear here, with a citation for every claim it makes." />
+        )}
       </Tabs.Panel>
     </Tabs>
   );

@@ -26,7 +26,7 @@ import { emitReceipt, persistAgentRun } from "../receipt/emit";
 import type { Receipt, ActorRole } from "../receipt/types";
 import { MODEL_SECTIONS, RESPONSE_SCHEMA, systemPrompt } from "./prompt";
 import { TOOL_SPECS, runTool, type ToolContext } from "./tools";
-import { validate, type ValidationResult } from "./validator";
+import { validateSections, type SectionValidation } from "./validator";
 
 // Decision 006. Tarik's call, twice: Sonnet 5 first, then Sonnet 4.5 once the
 // cost of getting it was clear. Sonnet 5 has no AWS Marketplace agreement on
@@ -76,7 +76,7 @@ export type AgentTurn = {
   readonly runId: string;
   readonly receipt: Receipt;
   readonly sections: Record<string, string>;
-  readonly validation: ValidationResult;
+  readonly validation: SectionValidation;
   readonly latencyMs: number;
   // One entry per model call. Plan 3 budgets 12 seconds for a whole turn, and
   // the honest fix for an over-budget turn is fewer tool calls — which you
@@ -259,7 +259,7 @@ export async function runAgentTurn(
     memory: observed.memory ?? emptyMemory(),
     evidence: observed.evidence,
   });
-  const validation = validate(Object.values(sections).join(" "), receipt.items);
+  const validation = validateSections(sections, receipt.items);
   const latencyMs = Math.round(performance.now() - started);
 
   const runId = await persistAgentRun({
