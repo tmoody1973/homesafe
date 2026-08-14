@@ -13,6 +13,7 @@
 
 import rulesFile from "../../data/policy/mass-housing-rules.json";
 import codeFile from "../../data/policy/sanitary-code-410.json";
+import guidesFile from "../../data/policy/tenant-guides.json";
 import { appPool } from "../db/pool";
 import { embed } from "../memory/embed";
 
@@ -51,6 +52,20 @@ function codeBody(section: CodeSection): string {
   );
 }
 
+type TenantGuide = { readonly id: string; readonly topic: string; readonly description: string };
+
+// Third tier: referrals to Legal Tactics, the legal-aid self-help guide.
+// Copyrighted authored work, so NOTHING is reproduced — each body is our own
+// one-paragraph description of what a chapter covers, plus the guide's URL.
+// The agent's job with these is one sentence: "a step-by-step legal-aid guide
+// exists for exactly this — here is where."
+function guideBody(guide: TenantGuide, guideUrl: string): string {
+  return (
+    `TENANT GUIDE — ${guide.topic}: ${guide.description} ` +
+    `(Free from Massachusetts legal aid organizations at ${guideUrl} — HomeSafe links to this guide and does not reproduce it.)`
+  );
+}
+
 async function insertPolicy(body: string): Promise<void> {
   const vector = await embed(body);
   await appPool().query(
@@ -74,7 +89,9 @@ export async function ingestPolicyRules(): Promise<number> {
   );
   for (const rule of rules) await insertPolicy(policyBody(rule));
   for (const section of sections) await insertPolicy(codeBody(section));
-  return rules.length + sections.length;
+  const { guides, guide_url } = guidesFile as { guides: TenantGuide[]; guide_url: string };
+  for (const guide of guides) await insertPolicy(guideBody(guide, guide_url));
+  return rules.length + sections.length + guides.length;
 }
 
 if (import.meta.main) {

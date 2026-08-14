@@ -1,0 +1,47 @@
+{
+  "_readme": "Referral entries for Legal Tactics: Tenants' Rights in Massachusetts, the free plain-language guide by the Massachusetts Law Reform Institute, published at MassLegalHelp.org. UNLIKE the statutes, this is copyrighted authored work — so these entries contain NO reproduced text. Each is a description in HomeSafe's own words of what a chapter covers, pointing to the guide's landing page (their site blocks automated access, so deep links are not verified; one hop from the landing page reaches every chapter). Purpose: the agent can tell a resident that a step-by-step legal-aid guide exists for their exact situation, and where it is.",
+  "guide_url": "https://www.masslegalhelp.org/housing-apartments-shelter/tenants-rights/legal-tactics",
+  "publisher": "Massachusetts Law Reform Institute / MassLegalHelp",
+  "guides": [
+    {
+      "id": "lt-repairs",
+      "topic": "Getting repairs made — the full playbook",
+      "description": "Legal Tactics chapter 8 walks through getting a landlord to make repairs, step by step: documenting conditions, requesting an inspection, written notice, and the legal remedies (withholding, repair-and-deduct, court) with their requirements and risks. Written for tenants representing themselves."
+    },
+    {
+      "id": "lt-eviction",
+      "topic": "Facing eviction",
+      "description": "Legal Tactics chapter 12 covers evictions in Massachusetts — the notice a landlord must give, the court process, tenant defenses (including bad conditions and retaliation), and deadlines that matter. The guide also includes fifteen self-help booklets with court forms for tenants facing eviction."
+    },
+    {
+      "id": "lt-security-deposit",
+      "topic": "Security deposits and last month's rent",
+      "description": "Legal Tactics chapter 3 explains the strict Massachusetts rules on security deposits — how they must be held, the statements and interest a tenant is owed, and what a tenant can recover when the rules are broken."
+    },
+    {
+      "id": "lt-utilities",
+      "topic": "Utility problems — who pays, shutoffs, cross-metering",
+      "description": "Legal Tactics chapter 6 covers utilities: when a landlord must pay, protections against shutoff, and what to do when a tenant is billed for someone else's usage."
+    },
+    {
+      "id": "lt-lead",
+      "topic": "Lead paint and children",
+      "description": "Legal Tactics chapter 9 explains Massachusetts lead-paint law: the duty to delead when a child under six lives in the home, and what tenants can do — important because a landlord may not legally refuse to rent to families to avoid deleading."
+    },
+    {
+      "id": "lt-organizing",
+      "topic": "Organizing with other tenants",
+      "description": "Legal Tactics chapter 10 covers tenant organizing — building-wide problems are stronger cases together, and organizing activity is legally protected against retaliation."
+    },
+    {
+      "id": "lt-court",
+      "topic": "Taking a landlord to court",
+      "description": "Legal Tactics chapters 13 and 14 explain when suing a landlord makes sense, small claims versus Housing Court, and how the court process works for a tenant without a lawyer."
+    },
+    {
+      "id": "lt-discrimination",
+      "topic": "Housing discrimination",
+      "description": "Legal Tactics chapter 7 covers discrimination — the protected categories under Massachusetts law (including having children, using vouchers, disability) and where to file a complaint."
+    }
+  ]
+}
