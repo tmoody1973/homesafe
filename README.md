@@ -28,6 +28,21 @@ the mechanism that makes the agent trustworthy:
 - **Semantic memory.** Resident notes become 1024-dimension Titan embeddings in
   `memory_item VECTOR(1024)`, searched through a distributed vector index. "The heat is
   still out" finds last week's note about cold radiators without sharing a word with it.
+- **The agent's own diary.** After every verified answer, the agent stores its conclusion
+  back into the same memory table as an `agent_summary` embedding — only sentences that
+  survived validation may be memorised. Next session it recalls its own prior reasoning,
+  and the receipt labels it honestly: *"a record of past reasoning, not a source of new
+  facts."*
+- **Task state.** Each answer's "possible next human step" becomes a draft `task` row —
+  written by code from the validated output, never by a model tool. The agent proposes;
+  the resident approves or dismisses. Store, retrieve, **act**.
+- **Memory that forgets on schedule.** Revoking a memory hides it instantly and sets an
+  `expires_at` that CockroachDB's native **row-level TTL** acts on — the database itself
+  erases the bytes, not an application job we promise to run.
+- **Follower reads on public data.** The million-row timeline reads `AS OF SYSTEM TIME
+  follower_read_timestamp()` — historical records tolerate seconds of staleness, so the
+  read comes from the nearest replica. Never used on private reads, where staleness would
+  mean answering from an outdated consent state.
 - **The consent boundary lives in the SQL.** Case ownership and consent filters sit in the
   `WHERE` clause, evaluated **before** similarity ordering — another resident's note is never
   ranked, never fetched, never in process memory. The receipt reports how many items the
@@ -125,3 +140,24 @@ run, the cross-case zero-rows output, screenshots of the validator deleting a fa
 citation on screen, measured latencies, and the negative tests proving `evidence_ro` cannot
 read a single private row. The build's decision log is in [docs/decisions/](docs/decisions/),
 and the mistakes that shaped it are in [docs/LEARNING-LOG.md](docs/LEARNING-LOG.md).
+Real-building case studies — real records, fictional residents, labeled as such — are in
+[docs/CASE-STUDIES.md](docs/CASE-STUDIES.md).
+
+## Feedback to Cockroach Labs on the AI tools
+
+Offered in the spirit of the submission form's request, from a project that used all four:
+
+- **Managed MCP Server.** Excellent for build-time schema work from Claude Code. Two
+  findings kept it out of our runtime path (full write-up in
+  [decision 003](docs/decisions/003-mcp-build-time-only.md)): `managed-mcp` is an
+  explicit member of `admin` and cannot be scoped down — for a consent-sensitive app,
+  an unscopeable identity can't sit in the serving path — and the ~10 KiB response cap
+  silently truncates result sets mid-answer. A scoped-login mode and an explicit
+  truncation marker would make it production-viable for apps like this one.
+- **Agent Skills Repo** was the sleeper hit: `hardening-user-privileges` caught the
+  `PUBLIC`-role default-grant trap that our whole security model would otherwise have
+  silently missed, and `profiling-statement-fingerprints` guided the index work that took
+  address lookup from 1,900 ms to 53 ms.
+- **Row-level TTL + vector columns together** turned out to be the sharpest privacy story
+  in the stack: consented memory that the database itself forgets. More examples pairing
+  the two would be a gift to consent-sensitive agent builders.

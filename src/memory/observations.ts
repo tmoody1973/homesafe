@@ -119,3 +119,24 @@ export async function embedPendingObservations(
   }
   return embedded;
 }
+
+const REVOCATION_GRACE = "30 days";
+
+// Revoking hides the memory from every query instantly (revoked_at) and
+// schedules its physical deletion by the database's own TTL job (expires_at,
+// migration 008). Ownership is checked in the same statement: a memory id
+// belonging to someone else updates zero rows and reports failure.
+export async function revokeMemory(
+  memoryId: string,
+  userId: string,
+): Promise<boolean> {
+  const { rowCount } = await appPool().query(
+    `UPDATE memory_item
+     SET revoked_at = now(), expires_at = now() + $3::INTERVAL
+     WHERE memory_id = $1
+       AND revoked_at IS NULL
+       AND case_id IN (SELECT case_id FROM housing_case WHERE user_id = $2)`,
+    [memoryId, userId, REVOCATION_GRACE],
+  );
+  return (rowCount ?? 0) > 0;
+}

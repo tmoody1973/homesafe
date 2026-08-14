@@ -175,3 +175,32 @@ export function latestAnswerFor(caseId: string): Promise<LatestAnswer | null> {
     };
   });
 }
+
+export type CaseTask = {
+  readonly taskId: string;
+  readonly title: string;
+  readonly status: string;
+  readonly createdAt: Date;
+};
+
+type TaskRow = { task_id: string; title: string; status: string; created_at: Date };
+
+export function tasksFor(caseId: string, userId: string): Promise<CaseTask[]> {
+  return withVerifiedLogin(async () => {
+    const { rows } = await appPool().query<TaskRow>(
+      `SELECT task_id, title, status, created_at
+       FROM task
+       WHERE case_id = $1
+         AND status IN ('draft', 'done')
+         AND case_id IN (SELECT case_id FROM housing_case WHERE user_id = $2)
+       ORDER BY created_at DESC LIMIT 10`,
+      [caseId, userId],
+    );
+    return rows.map((row) => ({
+      taskId: row.task_id,
+      title: row.title,
+      status: row.status,
+      createdAt: row.created_at,
+    }));
+  });
+}

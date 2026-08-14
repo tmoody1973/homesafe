@@ -46,7 +46,10 @@ const SENTENCE_BOUNDARY = /(?<=[.!?])\s+/;
 const LANE_BY_KIND: Record<ReceiptItem["kind"], Lane> = {
   public_event: "public_record",
   resident_observation: "resident_account",
-  agent_memory: "resident_account",
+  // The agent's own earlier conclusions are analysis, not the resident's
+  // words — putting them in the resident lane would dress the agent's voice
+  // in Maya's.
+  agent_memory: "analysis",
 };
 
 function refsIn(sentence: string): string[] {

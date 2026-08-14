@@ -69,6 +69,12 @@ const SELECTED_COLUMNS = `
 //
 // UNION, not UNION ALL: an event carrying both an address link and a matching
 // parcel would otherwise appear twice.
+// AS OF SYSTEM TIME follower_read_timestamp(): public records are historical
+// facts — a violation from 2014 did not change in the last five seconds — so
+// the read may come from the nearest replica at a timestamp a few seconds
+// old, skipping the trip to the range leaseholder. Verified live as
+// evidence_ro before being written here. Never used on private case reads,
+// where staleness would mean answering from a consent state that has changed.
 const TIMELINE_SQL = `
   WITH target AS (
     SELECT address_entity_id, parcel_id
@@ -96,6 +102,8 @@ const TIMELINE_SQL = `
   LIMIT ${MAX_ITEMS}
 `;
 
+
+
 function toItem(row: Row): EvidenceItem {
   return {
     // The opaque citation token. A model is shown this and never a source URL,
@@ -116,10 +124,24 @@ function toItem(row: Row): EvidenceItem {
   };
 }
 
+// The follower-read timestamp applies to the whole statement, and a UNION of
+// CTEs leaves no single FROM to hang the clause on — so the read runs inside
+// a read-only historical transaction instead, which is the documented shape
+// for multi-part statements.
 export async function publicTimeline(
   samAddressId: number,
   pool: Pool = evidencePool(),
 ): Promise<EvidenceItem[]> {
-  const { rows } = await pool.query<Row>(TIMELINE_SQL, [samAddressId]);
-  return rows.map(toItem);
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN AS OF SYSTEM TIME follower_read_timestamp()");
+    const { rows } = await client.query<Row>(TIMELINE_SQL, [samAddressId]);
+    await client.query("COMMIT");
+    return rows.map(toItem);
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }

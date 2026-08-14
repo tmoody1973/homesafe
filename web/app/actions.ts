@@ -109,3 +109,21 @@ export async function askAgentAction(formData: FormData): Promise<void> {
   await runAgentTurn({ caseId, userId: session.userId, role }, question);
   revalidatePath(`/case/${caseId}`);
 }
+
+// Approve or dismiss a task the agent drafted. The agent proposes; only the
+// resident's press of a button changes status — and ownership rides in the
+// same UPDATE, so a stranger's press changes zero rows.
+export async function updateTaskAction(formData: FormData): Promise<void> {
+  const caseId = String(formData.get("case_id") ?? "");
+  const session = await requireCaseOwner(caseId);
+  const taskId = String(formData.get("task_id") ?? "");
+  const nextStatus = String(formData.get("next_status"));
+  if (nextStatus !== "done" && nextStatus !== "dismissed") return;
+  await appPool().query(
+    `UPDATE task SET status = $1
+     WHERE task_id = $2 AND case_id = $3
+       AND case_id IN (SELECT case_id FROM housing_case WHERE user_id = $4)`,
+    [nextStatus, taskId, caseId, session.userId],
+  );
+  revalidatePath(`/case/${caseId}`);
+}

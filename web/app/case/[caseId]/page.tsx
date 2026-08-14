@@ -1,12 +1,13 @@
 import { Alert, Button, Link } from "@heroui/react";
 import { notFound, redirect } from "next/navigation";
-import { caseHeaderFor, latestAnswerFor, observationsFor } from "../../../lib/case";
+import { caseHeaderFor, latestAnswerFor, observationsFor, tasksFor } from "../../../lib/case";
 import { readSession } from "../../../lib/session";
 import { timelineFor } from "../../../lib/evidence";
 import { AddressMap } from "../../components/AddressMap";
 import { AnalysisLane } from "../../components/AnalysisLane";
 import { AskForm, NoteForm } from "../../components/CaseForms";
 import { NotesLane } from "../../components/NotesLane";
+import { TaskList } from "../../components/TaskList";
 import { ThreeLanes } from "../../components/ThreeLanes";
 import { signOutAction } from "../../actions";
 
@@ -28,12 +29,13 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
   // same 404 as a case that does not exist — not a hint that it does.
   if (header.userId !== session.userId) notFound();
 
-  const [notes, answer, publicRecords] = await Promise.all([
+  const [notes, answer, publicRecords, tasks] = await Promise.all([
     observationsFor(caseId, session.userId),
     latestAnswerFor(caseId),
     header.samAddressId === null
       ? Promise.resolve([])
       : timelineFor(header.samAddressId),
+    tasksFor(caseId, session.userId),
   ]);
 
   return (
@@ -79,6 +81,7 @@ export default async function CasePage(props: PageProps<"/case/[caseId]">) {
           <div className="flex flex-col gap-6">
             <AskForm caseId={caseId} />
             <AnalysisLane answer={answer} />
+            <TaskList caseId={caseId} tasks={tasks} />
           </div>
         }
         items={publicRecords}

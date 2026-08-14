@@ -18,6 +18,9 @@ import type {
 const OBSERVATION_CAVEAT =
   "Resident-provided statement; not independently verified.";
 
+const AGENT_MEMORY_CAVEAT =
+  "HomeSafe's own earlier conclusion — a record of past reasoning, not a source of new facts.";
+
 export type RetrievalObserved = {
   readonly caseId: string;
   readonly actor: ReceiptActor;
@@ -31,16 +34,19 @@ function memoryItemFrom(
   hit: MemorySearchResult["hits"][number],
   question: string,
 ): ReceiptItem {
+  const isObservation = hit.ref.startsWith("obs_");
   return {
     ref: hit.ref,
-    kind: hit.ref.startsWith("obs_") ? "resident_observation" : "agent_memory",
+    kind: isObservation ? "resident_observation" : "agent_memory",
     display_text: hit.body,
     consent_state: hit.consentScope,
     recorded_at: hit.createdAt.toISOString(),
     surfaced_by: "vector_similarity",
     vector_distance: hit.distance,
-    retrieval_reason: `Closest stored note to "${question}"`,
-    caveat: OBSERVATION_CAVEAT,
+    retrieval_reason: isObservation
+      ? `Closest stored note to "${question}"`
+      : `The agent's own earlier conclusion, closest in meaning to "${question}"`,
+    caveat: isObservation ? OBSERVATION_CAVEAT : AGENT_MEMORY_CAVEAT,
   };
 }
 

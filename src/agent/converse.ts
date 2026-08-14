@@ -23,6 +23,7 @@ import { embed } from "../memory/embed";
 import type { MemorySearchResult } from "../memory/search";
 import { searchCaseMemory } from "../memory/search";
 import { emitReceipt, persistAgentRun } from "../receipt/emit";
+import { renderValidated } from "./validator";
 import type { Receipt, ActorRole } from "../receipt/types";
 import { MODEL_SECTIONS, RESPONSE_SCHEMA, systemPrompt } from "./prompt";
 import { TOOL_SPECS, runTool, type ToolContext } from "./tools";
@@ -269,7 +270,66 @@ export async function runAgentTurn(
     validatorResult: validation,
     latencyMs,
   });
+  // After the answer is stored: the agent writes its own memory and leaves a
+  // draft task behind. Failures here must never cost the resident the answer
+  // they already have, so both are best-effort.
+  await rememberOwnConclusion(context, question, validation).catch((e) => console.error("DIARY-FAIL", (e as Error).message));
+  await draftNextStepTask(context, validation).catch(() => {});
   return { runId, receipt, sections, validation, latencyMs, roundLatenciesMs };
+}
+
+const SUMMARY_LIMIT = 600;
+
+// The agent's diary. Only sentences that SURVIVED validation are remembered —
+// the agent cannot memorise a claim it was not allowed to say. Stored as
+// 'agent_summary' with its own embedding, so the next session recalls this
+// conclusion by meaning, and the receipt labels it as the agent's own prior
+// reasoning rather than a source of new facts.
+async function rememberOwnConclusion(
+  context: ToolContext,
+  question: string,
+  validation: SectionValidation,
+): Promise<void> {
+  if (!validation.ok) return;
+  const found = validation.sections.what_i_found;
+  const changed = validation.sections.what_changed;
+  const body = [
+    `Earlier, asked "${question}", I concluded:`,
+    found ? renderValidated(found) : "",
+    changed ? renderValidated(changed) : "",
+  ]
+    .join(" ")
+    .slice(0, SUMMARY_LIMIT);
+  const vector = await embed(body);
+  await appPool().query(
+    `INSERT INTO memory_item (case_id, memory_type, body, embedding)
+     VALUES ($1, 'agent_summary', $2, $3::VECTOR)`,
+    [context.caseId, body, `[${vector.join(",")}]`],
+  );
+}
+
+const TASK_TITLE_LIMIT = 140;
+
+// The act half: the model's "possible next human step" becomes a durable
+// draft task — written by this code from the VALIDATED section, never by a
+// model tool (the four-tools rule stands). Drafts require the resident's
+// approval; the agent proposes, the person decides.
+async function draftNextStepTask(
+  context: ToolContext,
+  validation: SectionValidation,
+): Promise<void> {
+  const step = validation.sections.possible_next_human_step;
+  if (!validation.ok || !step) return;
+  const title = renderValidated(step).slice(0, TASK_TITLE_LIMIT).trim();
+  if (title === "") return;
+  await appPool().query(
+    `INSERT INTO task (case_id, owner_role, title, status, requires_approval)
+     SELECT $1, 'resident', $2, 'draft', true
+     WHERE NOT EXISTS (
+       SELECT 1 FROM task WHERE case_id = $1 AND title = $2 AND status = 'draft'
+     )`,
+    [context.caseId, title],
+  );
 }
 
 // A turn where the model never searched memory still needs an honest receipt:
